@@ -2,45 +2,44 @@
 
 # Revenue architects
 
+<!-- id: 7cxzqoz -->
+
 ## Website Home Demo
 
+<!-- id: qtpf3hf -->
+<!-- sharing: public -->
+
 ### Hero
+
+<!-- id: ocnsant -->
 
 <!-- type: hero -->
 
 _The firm behind Revenue Architecture®_
 
-#### We don't just design your revenue architecture. We operate it.
+#### We don't just design your revenue architecture. We help you operate it.
 
-Revenue Architects is the practitioner team that created and stewards RAOS — the Revenue Architecture Operating System. We certify the practitioners, train the teams, and take on the engagements where it matters most.
+Revenue Architects is the practitioner team that created RAOS — the Revenue Architecture Operating System. We train the teams who run it, certify practitioners, and deliver engagements where the architecture has to hold.
 
-[Engage the authors](#engage) · [Get certified](#certified)
+[Engage the authors](/engage) · [Get certified](/services#certification)
 
-### Living infrastructure
+### The authority
 
-<!-- type: stats -->
+<!-- id: fin3zjx -->
 
-#### It is living infrastructure
+<!-- type: authority -->
 
-3 Layers, 9 Playbooks, 27 Plays — powered by RAi.
+_The authority_
 
-- 3 — Layers
-- 9 — Playbooks
-- 27 — Plays
+#### We hold the mark — and the canon underneath it.
 
-### Three ways to work
+Many firms borrow the words. Revenue Architecture® is ours, and so is the structure beneath it: three layers that resolve into nine playbooks, twenty-seven plays, and five Operating Agents — orchestrated by people, operated by AI.
 
-<!-- type: featuregrid -->
-
-#### Three ways to work with the source
-
-The same team that wrote the method delivers all three. Most firms start with Certification or an Engagement.
-
-- Certification — Become a Certified Revenue Architect™ and license the method.
-- Engagement — The authors design and operate your revenue architecture with you.
-- Engagement Agent — The method, run on your business, before you've paid a dollar.
+[See the full method at revenuearchitecture.com](https://revenuearchitecture.com/)
 
 ### The authors
+
+<!-- id: lzzwk4r -->
 
 <!-- type: pageintro -->
 
@@ -48,20 +47,42 @@ _The authors_
 
 #### You are hiring the source.
 
-Sherwin and John wrote the method. They lead every engagement we take, backed by a supporting team and a network of Certified Architects who carry the same standard into the field.
+Sherwin and John wrote Revenue Architecture. They lead every engagement the firm takes, backed by a supporting team and a network of Certified Architects who carry the same standard into the field.
 
-We take a small number of engagements at a time. That is by design — the people who built the architecture are the people who run it with you.
+We take a small number of engagements at a time, and that is the offer, not a limitation. The people who built the architecture are the people who run it with you — not a junior bench, not a licensee, not a loose reading of the words.
 
-[Meet the firm →](#firm)
+[Meet the firm](/about)
 
-### Get started
+### Selected clients
+
+<!-- id: wlz9uu9 -->
+
+<!-- type: clients -->
+
+_Selected clients_
+
+Firms in financial services and high-consideration B2B have trusted the team behind Revenue Architects with their growth.
+
+- Charles Schwab
+- Natixis
+- Directions
+- 4R
+- Imprivata
+- Arcserve
+- Cognizant
+
+[See the proof](/proof)
+
+### Two ways forward
+
+<!-- id: 6wb00hl -->
 
 <!-- type: ctabanner -->
 
 _Two ways forward_
 
-#### Engage the authors, or get certified.
+#### Read the method, or scope an engagement with the authors.
 
-Start with the Friction Diagnostic — step one of the delivery model — or license the method as a Certified Revenue Architect.
+Run the Diagnostic and read the canon at revenuearchitecture.com — or bring us a problem and we will tell you whether it is one we should take.
 
-[Engage the authors](#engage) · [Get certified](#certified)
+[Read the method](https://revenuearchitecture.com/) · [Scope an engagement](/engage)
