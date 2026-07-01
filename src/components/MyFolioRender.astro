@@ -77,6 +77,61 @@ const btns = (links) => links.map((l, i) => ({
     <CtaBlock eyebrow={s.eyebrow} heading={s.heading} body={s.paras.join(' ')} buttons={btns(s.links)} />
   );
 
+  if (s.type === 'authority') {
+    // The three RAOS layers are fixed canon, so the diagram is a constant.
+    const LAYERS = [
+      { tag: 'Layer I',   title: 'Revenue Strategy',   sub: 'Market definition \u00b7 value positioning \u00b7 go-to-market', bar: 'border-l-orange', dot: 'bg-orange' },
+      { tag: 'Layer II',  title: 'Revenue Platform',   sub: 'Brand system \u00b7 revenue technology \u00b7 operations',       bar: 'border-l-navy',   dot: 'bg-navy' },
+      { tag: 'Layer III', title: 'Revenue Production', sub: 'Demand \u00b7 opportunity \u00b7 account expansion',            bar: 'border-l-teal',   dot: 'bg-teal' },
+    ];
+    return (
+      <section class="mx-auto max-w-content px-6 py-section">
+        <div class="grid gap-10 md:grid-cols-2 md:items-center">
+          <div>
+            {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+            {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
+            <div class="mt-4 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+            {s.links.map((l) => (
+              <a href={l.href} rel={/^https?:/i.test(l.href) ? 'noopener' : undefined} target={/^https?:/i.test(l.href) ? '_blank' : undefined} class="mt-6 inline-flex items-center text-sm font-semibold text-teal transition-colors hover:text-teal-600">{l.label} &rarr;</a>
+            ))}
+          </div>
+          <div class="rounded-card border border-navy-100 bg-grid p-5 md:p-6">
+            <div class="space-y-4">
+              {LAYERS.map((L) => (
+                <div class:list={['rounded-card border border-navy-100 border-l-4 bg-surface p-4', L.bar]}>
+                  <div class="flex items-start justify-between">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-teal">{L.tag}</p>
+                    <div class="flex gap-1">
+                      <span class:list={['h-2 w-2 rounded-sm opacity-40', L.dot]} />
+                      <span class:list={['h-2 w-2 rounded-sm opacity-70', L.dot]} />
+                      <span class:list={['h-2 w-2 rounded-sm', L.dot]} />
+                    </div>
+                  </div>
+                  <h3 class="mt-1 text-xl font-bold text-navy">{L.title}</h3>
+                  <p class="mt-1 text-sm text-ink">{L.sub}</p>
+                </div>
+              ))}
+            </div>
+            <p class="mt-5 text-sm font-semibold text-navy">Human-Orchestrated. AI-Operated.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (s.type === 'clients') return (
+    <section class="mx-auto max-w-content px-6 py-section">
+      {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+      {s.paras.map((p) => <p class="mt-4 max-w-prose text-ink">{p}</p>)}
+      <div class="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4">
+        {s.items.map((it) => <span class="text-sm font-semibold uppercase tracking-wide text-navy-300">{it.label}</span>)}
+      </div>
+      {s.links.map((l) => (
+        <a href={l.href} class="mt-8 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">{l.label} &rarr;</a>
+      ))}
+    </section>
+  );
+
   // Generic fallback
   return (
     <section class="mx-auto max-w-content px-6 py-section">

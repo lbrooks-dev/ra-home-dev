@@ -47,8 +47,10 @@ export function parseContent(md) {
       if ((m = t.match(/^_(.+)_$/))) { eyebrow = m[1].trim(); continue; }
       if ((m = t.match(/^#{4,6}\s+(.+)$/))) { heading = m[1].trim(); continue; }
       if ((m = t.match(/^[-*]\s+(.+)$/))) {
-        const parts = m[1].split(DASH);
-        items.push({ label: parts[0].trim(), text: parts.slice(1).join(' ').trim() });
+        const raw = m[1];
+        const sep = raw.match(/\s[\u2014\u2013-]\s/); // a dash with spaces around it — not hyphenated words
+        if (sep) items.push({ label: raw.slice(0, sep.index).trim(), text: raw.slice(sep.index + sep[0].length).trim() });
+        else items.push({ label: raw.trim(), text: '' });
         continue;
       }
       const found = [...t.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((x) => ({ label: x[1], href: x[2] }));
