@@ -1,0 +1,47 @@
+---
+const links = [
+  { href: '/about', label: 'The Firm' },
+  { href: '/services', label: 'Services' },
+  { href: '/proof', label: 'Proof' },
+  { href: '/engage', label: 'Engage' },
+];
+const path = Astro.url.pathname;
+const isActive = (href) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="border-b border-navy-100 bg-surface">
+  <nav
+    class="mx-auto flex max-w-content items-center justify-between gap-6 px-6 py-4"
+    aria-label="Primary"
+  >
+    <a href="/" class="text-lg font-extrabold tracking-tight text-navy">
+      Revenue Architects
+    </a>
+    <ul class="flex items-center gap-6 text-sm font-medium">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'transition-colors hover:text-orange',
+                isActive(link.href) ? 'text-orange' : 'text-ink',
+              ]}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="/engage"
+          class="rounded-card bg-orange px-4 py-2 font-semibold text-surface transition-colors hover:bg-orange-600"
+        >
+          Engage
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

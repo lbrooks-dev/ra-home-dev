@@ -1,0 +1,17 @@
+---
+// MyFolio-driven page: content from content.md, rendered through the site's
+// real components + tokens. Preview route so the real index.astro is untouched.
+import fs from 'node:fs';
+import path from 'node:path';
+import Base from '../layouts/Base.astro';
+import MyFolioRender from '../components/MyFolioRender.astro';
+import { parseContent } from '../lib/parseContent.js';
+
+let md = '';
+try { md = fs.readFileSync(path.resolve('./content.md'), 'utf8'); }
+catch (e) { md = '# Revenue Architects\n## Home\n### Notice\nNo content.md found at the repo root yet.'; }
+const { pageTitle, siteTitle, sections } = parseContent(md);
+---
+<Base title={pageTitle || siteTitle || 'Revenue Architects'}>
+  <MyFolioRender sections={sections} />
+</Base>

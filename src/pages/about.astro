@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+---
+
+<Base
+  title="The Firm"
+  description="Revenue Architects created and stewards Revenue Architecture. Built for high-consideration B2B and financial-services firms. Meet the authors."
+>
+  <section class="mx-auto max-w-content px-6 py-20 md:py-28">
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">The Firm</p>
+    <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
+      The firm that created Revenue Architecture&reg;.
+    </h1>
+    <p class="mt-6 max-w-prose text-lg text-ink">
+      Revenue Architects built and stewards the method. We work with high-consideration
+      B2B and financial-services firms — the ones whose buyers take months to decide and
+      whose revenue cannot be left to chance.
+    </p>
+  </section>
+
+  <!-- The authors -->
+  <section class="bg-navy-100/40">
+    <div class="mx-auto max-w-content px-6 py-section">
+      <h2 class="text-2xl md:text-3xl">The authors</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <article class="rounded-card border border-navy-100 bg-surface p-6">
+          <h3 class="text-xl">John Stone</h3>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-teal">
+            Founder &amp; CEO
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-ink">
+            John founded Revenue Architects and leads the firm. He is a co-author of the
+            method and sets the standard for how engagements are run. [bio to confirm —
+            credentials, prior firms, and named results to be finalized by the team.]
+          </p>
+        </article>
+        <article class="rounded-card border border-navy-100 bg-surface p-6">
+          <h3 class="text-xl">Sherwin</h3>
+          <p class="mt-1 text-sm font-semibold uppercase tracking-wide text-teal">
+            Co-author
+          </p>
+          <p class="mt-4 text-sm leading-relaxed text-ink">
+            Sherwin is co-author of Revenue Architecture and a principal on engagements.
+            [bio to confirm — full name, title, credentials, and focus areas to be
+            finalized by the team.]
+          </p>
+        </article>
+      </div>
+      <p class="mt-6 max-w-prose text-sm text-ink">
+        Behind the authors sits a supporting team and a network of Certified Architects.
+        They are backing, not a headcount showcase. When you engage us, the authors are
+        on the work.
+      </p>
+    </div>
+  </section>
+
+  <!-- Trademark -->
+  <section class="mx-auto max-w-content px-6 py-section">
+    <h2 class="text-2xl md:text-3xl">The mark and the canon</h2>
+    <div class="mt-6 max-w-prose space-y-4 text-ink">
+      <p>
+        Others have used the words loosely. We own the mark and the canon behind it.
+        Revenue Architecture&reg; is a registered trademark of Revenue Architects, and
+        RAOS — the Revenue Architecture Operating System — is the structured body of work
+        underneath it: three layers, nine playbooks, twenty-seven plays, five Operating
+        Agents.
+      </p>
+      <p>
+        The method is human-orchestrated and AI-operated. That is why a small,
+        author-led team can both design an architecture and run it.
+      </p>
+    </div>
+    <a
+      href="https://revenuearchitecture.com"
+      rel="noopener"
+      target="_blank"
+      class="mt-6 inline-flex items-center text-sm font-semibold text-teal transition-colors hover:text-teal-600"
+    >
+      Read the canon at revenuearchitecture.com &rarr;
+    </a>
+  </section>
+
+  <CtaBlock
+    heading="Bring us the problem the architecture has to solve."
+    body="We take a small number of engagements. Tell us what you are trying to fix and we will tell you whether it is one for us."
+    buttons={[
+      { href: '/engage', label: 'Engage the authors', variant: 'orange' },
+      { href: '/services', label: 'See the services', variant: 'outline' },
+    ]}
+  />
+</Base>

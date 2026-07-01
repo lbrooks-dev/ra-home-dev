@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+---
+
+<Base
+  title="Services"
+  description="Revenue Architects offers three things: Certification, Training, and Engagement. Design and operate are unified — RAOS is human-orchestrated and AI-operated."
+>
+  <section class="mx-auto max-w-content px-6 py-20 md:py-28">
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">Services</p>
+    <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
+      Three ways to put the method to work.
+    </h1>
+    <p class="mt-6 max-w-prose text-lg text-ink">
+      We offer three things: certification, training, and engagement. Design and operate
+      are not separate practices here. RAOS is human-orchestrated and AI-operated, so a
+      small author-led team can both design the architecture and run it.
+    </p>
+    <nav class="mt-8 flex flex-wrap gap-3 text-sm font-semibold" aria-label="Service sections">
+      <a href="#certification" class="rounded-card border border-navy-100 px-4 py-2 text-navy transition-colors hover:border-orange hover:text-orange">Certification</a>
+      <a href="#training" class="rounded-card border border-navy-100 px-4 py-2 text-navy transition-colors hover:border-orange hover:text-orange">Training</a>
+      <a href="#engagement" class="rounded-card border border-navy-100 px-4 py-2 text-navy transition-colors hover:border-orange hover:text-orange">Engagement</a>
+    </nav>
+  </section>
+
+  <!-- Certification -->
+  <section id="certification" class="scroll-mt-24 border-t-4 border-orange bg-navy-100/40">
+    <div class="mx-auto max-w-content px-6 py-section">
+      <p class="text-sm font-semibold uppercase tracking-wide text-orange-600">Certification</p>
+      <h2 class="mt-2 text-2xl md:text-3xl">Become a Certified Revenue Architect™</h2>
+      <div class="mt-6 max-w-prose space-y-4 text-ink">
+        <p>
+          License the method. You get the skill files, the badge, and the right to
+          practice Revenue Architecture under the standard we set — then deploy it with
+          bench support behind you.
+        </p>
+        <p class="font-semibold text-navy">Who it is for</p>
+        <p>
+          Practitioners, single-shingle consultants, and small consultancies who want to
+          stop reinventing their delivery and start running a method that holds.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training -->
+  <section id="training" class="scroll-mt-24 border-t-4 border-teal">
+    <div class="mx-auto max-w-content px-6 py-section">
+      <p class="text-sm font-semibold uppercase tracking-wide text-teal">Training</p>
+      <h2 class="mt-2 text-2xl md:text-3xl">Train the trainer. Enable the team.</h2>
+      <div class="mt-6 max-w-prose space-y-4 text-ink">
+        <p>
+          Train-the-trainer programs and team enablement on RAOS for in-house revenue
+          organizations and agencies. We bring the method to your people so they can run
+          it without us in the room.
+        </p>
+        <p class="font-semibold text-navy">Who it is for</p>
+        <p>
+          In-house revenue teams and agencies that want the operating model in the hands
+          of their own staff.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement -->
+  <section id="engagement" class="scroll-mt-24 border-t-4 border-orange bg-navy-100/40">
+    <div class="mx-auto max-w-content px-6 py-section">
+      <p class="text-sm font-semibold uppercase tracking-wide text-orange-600">Engagement</p>
+      <h2 class="mt-2 text-2xl md:text-3xl">The authors design and operate it.</h2>
+      <div class="mt-6 max-w-prose space-y-4 text-ink">
+        <p>We work in two modes:</p>
+        <ul class="space-y-3">
+          <li>
+            <span class="font-semibold text-navy">Advisory-led.</span> We architect; you
+            run. We design the revenue architecture and hand it to your team with the
+            playbooks to operate it.
+          </li>
+          <li>
+            <span class="font-semibold text-navy">Operated / done-with-you.</span> We run
+            it with you — agents operating under our orchestration, the authors
+            accountable for the result.
+          </li>
+        </ul>
+        <p>A limited number of slots. We take the engagements where the architecture has to hold.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBlock
+    eyebrow="Start here"
+    heading="Scope an engagement or get certified."
+    body="Tell us what you are trying to fix. We will point you to the right door."
+    buttons={[
+      { href: '/engage', label: 'Engage the authors', variant: 'orange' },
+      { href: '#certification', label: 'Get certified', variant: 'outline' },
+    ]}
+  />
+</Base>

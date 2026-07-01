@@ -1,0 +1,87 @@
+---
+// Renders MyFolio sections using this site's real tokens and components,
+// mirroring the markup patterns in src/pages/index.astro so the output is
+// styled identically. Content comes from MyFolio; the look is RA's.
+import Card from './Card.astro';
+import CtaBlock from './CtaBlock.astro';
+const { sections = [] } = Astro.props;
+
+const accents = ['orange', 'teal', 'navy'];
+// Map a section's links to CtaBlock button variants (first = orange, then teal).
+const btns = (links) => links.map((l, i) => ({
+  href: l.href, label: l.label,
+  variant: i === 0 ? 'orange' : 'teal',
+  external: /^https?:/i.test(l.href),
+}));
+---
+{sections.map((s) => {
+  if (s.type === 'hero') return (
+    <section class="border-b border-navy-100">
+      <div class="mx-auto max-w-content px-6 py-20 md:py-28">
+        {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+        <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">{s.heading}</h1>
+        {s.paras.map((p) => <p class="mt-6 max-w-prose text-lg text-ink">{p}</p>)}
+        {s.links.length > 0 && (
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            {s.links.map((l, i) => (
+              <a href={l.href} class:list={['inline-flex items-center justify-center rounded-card px-6 py-3 text-sm font-semibold transition-colors',
+                i === 0 ? 'bg-orange text-surface hover:bg-orange-600' : 'border border-navy text-navy hover:bg-navy hover:text-surface']}>{l.label}</a>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'stats') return (
+    <section class="mx-auto max-w-content px-6 py-section">
+      {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
+      {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        {s.items.map((it) => (
+          <div>
+            <div class="text-4xl font-bold text-orange md:text-5xl">{it.label}</div>
+            <div class="mt-2 text-sm font-semibold uppercase tracking-wide text-ink">{it.text}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'featuregrid') return (
+    <section class="mx-auto max-w-content px-6 py-section">
+      {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
+      {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {s.items.map((it, i) => (
+          <Card title={it.label} accent={accents[i % accents.length]}>{it.text}</Card>
+        ))}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'pageintro') return (
+    <section class="bg-navy-100/40">
+      <div class="mx-auto max-w-content px-6 py-section">
+        {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+        {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
+        <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+        {s.links.map((l) => (
+          <a href={l.href} class="mt-6 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">{l.label} &rarr;</a>
+        ))}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'ctabanner') return (
+    <CtaBlock eyebrow={s.eyebrow} heading={s.heading} body={s.paras.join(' ')} buttons={btns(s.links)} />
+  );
+
+  // Generic fallback
+  return (
+    <section class="mx-auto max-w-content px-6 py-section">
+      {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
+      <div class="mt-4 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+    </section>
+  );
+})}

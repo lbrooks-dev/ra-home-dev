@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Engage"
+  description="Engage the authors of Revenue Architecture. The FACT Intake — an agentic scoping conversation — is launching soon. For now, reach us directly."
+>
+  <section class="mx-auto max-w-content px-6 py-20 md:py-28">
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">Engage</p>
+    <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
+      Tell us what you are trying to fix.
+    </h1>
+    <p class="mt-6 max-w-prose text-lg text-ink">
+      Soon you will be able to talk to the FACT Intake — an agentic scoping conversation
+      that runs the RAOS FACT qualification: Fit, Authority, Criteria, Timeline. It is
+      launching in phase 2. Until then, the form below reaches us directly.
+    </p>
+  </section>
+
+  <section class="bg-navy-100/40">
+    <div class="mx-auto max-w-content px-6 py-section">
+      <div class="grid gap-10 md:grid-cols-5">
+        <!-- FACT teaser -->
+        <div class="md:col-span-2">
+          <div class="rounded-card border border-dashed border-teal-300 bg-teal-100/40 p-6">
+            <p class="text-xs font-semibold uppercase tracking-wide text-teal-600">
+              Coming soon — phase 2
+            </p>
+            <h2 class="mt-2 text-xl text-teal-900">The FACT Intake</h2>
+            <p class="mt-3 text-sm leading-relaxed text-ink">
+              An agentic conversation that qualifies the engagement against four tests:
+            </p>
+            <ul class="mt-3 space-y-1 text-sm text-ink">
+              <li><span class="font-semibold text-navy">Fit</span> — are you the kind of firm we serve?</li>
+              <li><span class="font-semibold text-navy">Authority</span> — are the right decision-makers engaged?</li>
+              <li><span class="font-semibold text-navy">Criteria</span> — what do you need, and how will you judge success?</li>
+              <li><span class="font-semibold text-navy">Timeline</span> — is there a compelling reason to act now?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!--
+          PLACEHOLDER FORM — Laura: this form is intentionally non-functional.
+          There is no backend wired up. When the FACT Intake (phase 2) ships, this
+          should either post to the intake agent or to a real handler/CRM.
+          For now it does nothing on submit (preventDefault) and just shows a note.
+        -->
+        <div class="md:col-span-3">
+          <form
+            class="rounded-card border border-navy-100 bg-surface p-6"
+            onsubmit="event.preventDefault(); document.getElementById('form-note').hidden = false;"
+            aria-describedby="form-note"
+          >
+            <h2 class="text-xl">Reach the authors</h2>
+            <div class="mt-5 space-y-4">
+              <div>
+                <label for="name" class="block text-sm font-semibold text-navy">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" class="mt-1 w-full rounded-card border border-navy-100 px-3 py-2 text-sm focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange" />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-semibold text-navy">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" class="mt-1 w-full rounded-card border border-navy-100 px-3 py-2 text-sm focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange" />
+              </div>
+              <div>
+                <label for="company" class="block text-sm font-semibold text-navy">Company</label>
+                <input id="company" name="company" type="text" autocomplete="organization" class="mt-1 w-full rounded-card border border-navy-100 px-3 py-2 text-sm focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange" />
+              </div>
+              <div>
+                <label for="problem" class="block text-sm font-semibold text-navy">What are you trying to fix?</label>
+                <textarea id="problem" name="problem" rows="4" class="mt-1 w-full rounded-card border border-navy-100 px-3 py-2 text-sm focus:border-orange focus:outline-none focus:ring-1 focus:ring-orange"></textarea>
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="mt-6 inline-flex items-center justify-center rounded-card bg-orange px-6 py-3 text-sm font-semibold text-surface transition-colors hover:bg-orange-600"
+            >
+              Send
+            </button>
+            <p id="form-note" hidden class="mt-4 text-sm text-teal-700">
+              This is a placeholder form — no message was sent. A real handler ships with phase 2.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Talk to a human -->
+      <p class="mt-10 max-w-prose text-sm text-ink">
+        Prefer a person? You can always reach a human. Email
+        <a href="mailto:contact@revenuearchitects.com" class="font-semibold text-orange transition-colors hover:text-orange-600">contact@revenuearchitects.com</a>
+        and one of the authors will reply. No bot wall, no qualification gate to get a first conversation.
+      </p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,38 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-section border-t border-navy-100 bg-surface">
+  <div
+    class="mx-auto flex max-w-content flex-col gap-6 px-6 py-12 md:flex-row md:items-start md:justify-between"
+  >
+    <div class="max-w-prose">
+      <p class="text-lg font-extrabold text-navy">Revenue Architects</p>
+      <p class="mt-2 text-sm text-ink">
+        The practitioner team behind Revenue Architecture&reg; and RAOS — the
+        Revenue Architecture Operating System.
+      </p>
+    </div>
+
+    <nav aria-label="Footer" class="flex flex-col gap-2 text-sm">
+      <a href="/about" class="text-ink transition-colors hover:text-orange">The Firm</a>
+      <a href="/services" class="text-ink transition-colors hover:text-orange">Services</a>
+      <a href="/proof" class="text-ink transition-colors hover:text-orange">Proof</a>
+      <a href="/engage" class="text-ink transition-colors hover:text-orange">Engage</a>
+      <a
+        href="https://revenuearchitecture.com"
+        class="text-teal transition-colors hover:text-teal-600"
+        >The method &rarr; revenuearchitecture.com</a
+      >
+    </nav>
+  </div>
+
+  <div class="border-t border-navy-100">
+    <div
+      class="mx-auto flex max-w-content flex-col gap-1 px-6 py-6 text-xs text-navy-400 md:flex-row md:justify-between"
+    >
+      <p>&copy; {year} Revenue Architects. All rights reserved.</p>
+      <p>Revenue Architecture&reg; is a registered trademark of Revenue Architects.</p>
+    </div>
+  </div>
+</footer>

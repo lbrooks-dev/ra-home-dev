@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Card from '../components/Card.astro';
+import CtaBlock from '../components/CtaBlock.astro';
+
+// [case study to add] — replace these stubs with real, named outcomes.
+const stubs = [
+  {
+    title: '[case study to add]',
+    metric: 'Outcome metric',
+    note: 'Sector, engagement mode, and a named before/after result. To be supplied by the team.',
+  },
+  {
+    title: '[case study to add]',
+    metric: 'Outcome metric',
+    note: 'Sector, engagement mode, and a named before/after result. To be supplied by the team.',
+  },
+  {
+    title: '[case study to add]',
+    metric: 'Outcome metric',
+    note: 'Sector, engagement mode, and a named before/after result. To be supplied by the team.',
+  },
+];
+---
+
+<Base
+  title="Proof"
+  description="Delivery evidence from Revenue Architects engagements."
+>
+  <section class="mx-auto max-w-content px-6 py-20 md:py-28">
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">Proof</p>
+    <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
+      The work, and the people who carry it.
+    </h1>
+    <p class="mt-6 max-w-prose text-lg text-ink">
+      We would rather show evidence than make claims. The outcomes below are placeholders
+      until the team confirms named results we can stand behind.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-content px-6 pb-section">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        stubs.map((s) => (
+          <Card title={s.title} eyebrow={s.metric} accent="navy">
+            {s.note}
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBlock
+    heading="Want the evidence in detail?"
+    body="Ask us directly. We will walk you through the relevant work under NDA."
+    buttons={[{ href: '/engage', label: 'Talk to the authors', variant: 'orange' }]}
+  />
+</Base>

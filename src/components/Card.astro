@@ -1,0 +1,32 @@
+---
+// Simple content card. Pass a title, optional eyebrow, optional href + cta.
+const { title, eyebrow, href, cta, accent = 'navy' } = Astro.props;
+const accentClass = {
+  navy: 'border-t-navy',
+  teal: 'border-t-teal',
+  orange: 'border-t-orange',
+}[accent] ?? 'border-t-navy';
+---
+
+<article
+  class:list={[
+    'flex h-full flex-col rounded-card border border-navy-100 border-t-4 bg-surface p-6 shadow-sm',
+    accentClass,
+  ]}
+>
+  {eyebrow && <p class="text-xs font-semibold uppercase tracking-wide text-teal">{eyebrow}</p>}
+  <h3 class="mt-1 text-xl">{title}</h3>
+  <div class="mt-3 flex-1 text-sm leading-relaxed text-ink">
+    <slot />
+  </div>
+  {
+    href && (
+      <a
+        href={href}
+        class="mt-5 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600"
+      >
+        {cta ?? 'Learn more'} &rarr;
+      </a>
+    )
+  }
+</article>
