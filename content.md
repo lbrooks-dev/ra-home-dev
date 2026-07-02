@@ -11,7 +11,7 @@
 
 ### Hero
 
-<!-- id: ocnsant -->
+<!-- id: j15srbz -->
 
 <!-- type: hero -->
 
@@ -25,7 +25,7 @@ Revenue Architects is the practitioner team that created RAOS — the Revenue Ar
 
 ### The authority
 
-<!-- id: fin3zjx -->
+<!-- id: 23xh81h -->
 
 <!-- type: authority -->
 
@@ -37,9 +37,25 @@ Many firms borrow the words. Revenue Architecture® is ours, and so is the struc
 
 [See the full method at revenuearchitecture.com](https://revenuearchitecture.com/)
 
+### The services
+
+<!-- id: f9hcz0q -->
+
+<!-- type: featuregrid -->
+
+_The services_
+
+#### Three ways to work with the source
+
+The same team that wrote the method delivers all three. Teams and practitioners start with training to run RAOS, certify to deliver it to the standard we set, and can bring us in for the engagements where the architecture has to hold.
+
+- Training — Hands-on training on RAOS for the teams and practitioners who run it — initial onboarding for licensed users and recurring training for subscribers, so the method becomes how your people work.
+- Certification — Become a Certified Revenue Architect™. After training, certify to license the method, take the skill files and the badge, and practice to the standard we set and stand behind.
+- Engagement — The authors design and help operate your revenue architecture — for end clients and for practitioner teams running RAOS. A limited number of slots.
+
 ### The authors
 
-<!-- id: lzzwk4r -->
+<!-- id: pf7gr32 -->
 
 <!-- type: pageintro -->
 
@@ -55,7 +71,7 @@ We take a small number of engagements at a time, and that is the offer, not a li
 
 ### Selected clients
 
-<!-- id: wlz9uu9 -->
+<!-- id: axlrgk9 -->
 
 <!-- type: clients -->
 
@@ -75,7 +91,7 @@ Firms in financial services and high-consideration B2B have trusted the team beh
 
 ### Two ways forward
 
-<!-- id: 6wb00hl -->
+<!-- id: 2twjjhk -->
 
 <!-- type: ctabanner -->
 
