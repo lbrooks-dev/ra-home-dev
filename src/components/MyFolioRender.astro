@@ -10,7 +10,7 @@ const accents = ['orange', 'teal', 'navy'];
 // Map a section's links to CtaBlock button variants (first = orange, then teal).
 const btns = (links) => links.map((l, i) => ({
   href: l.href, label: l.label,
-  variant: i === 0 ? 'orange' : 'teal',
+  variant: i === links.length - 1 ? 'orange' : 'teal',
   external: /^https?:/i.test(l.href),
 }));
 ---
@@ -18,7 +18,7 @@ const btns = (links) => links.map((l, i) => ({
   if (s.type === 'hero') return (
     <section class="border-b border-navy-100">
       <div class="mx-auto max-w-content px-6 py-20 md:py-28">
-        {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
         <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">{s.heading}</h1>
         {s.paras.map((p) => <p class="mt-6 max-w-prose text-lg text-ink">{p}</p>)}
         {s.links.length > 0 && (
@@ -48,22 +48,35 @@ const btns = (links) => links.map((l, i) => ({
     </section>
   );
 
-  if (s.type === 'featuregrid') return (
-    <section class="mx-auto max-w-content px-6 py-section">
-      {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
-      {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        {s.items.map((it, i) => (
-          <Card title={it.label} accent={accents[i % accents.length]}>{it.text}</Card>
-        ))}
-      </div>
-    </section>
-  );
+  if (s.type === 'featuregrid') {
+    // Fixed presentation per card position (matches dev: teal, orange, orange).
+    // Editable copy (title + body) still comes from content.
+    const CARD_META = [
+      { eyebrow: 'Enablement',       accent: 'teal',   cta: 'See training',        href: '/services#training' },
+      { eyebrow: 'Credential',       accent: 'orange', cta: 'Become certified',    href: '/services#certification' },
+      { eyebrow: 'With the authors', accent: 'orange', cta: 'Scope an engagement', href: '/engage' },
+    ];
+    return (
+      <section class="mx-auto max-w-content px-6 py-section">
+        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+        {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
+        {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {s.items.map((it, i) => {
+            const meta = CARD_META[i] ?? { accent: accents[i % accents.length] };
+            return (
+              <Card title={it.label} eyebrow={meta.eyebrow} accent={meta.accent} href={meta.href} cta={meta.cta}>{it.text}</Card>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
 
   if (s.type === 'pageintro') return (
     <section class="bg-navy-100/40">
       <div class="mx-auto max-w-content px-6 py-section">
-        {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
         {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
         <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
         {s.links.map((l) => (
@@ -88,9 +101,9 @@ const btns = (links) => links.map((l, i) => ({
       <section class="mx-auto max-w-content px-6 py-section">
         <div class="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
-            {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+            {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
             {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
-            <div class="mt-4 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+            <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
             {s.links.map((l) => (
               <a href={l.href} rel={/^https?:/i.test(l.href) ? 'noopener' : undefined} target={/^https?:/i.test(l.href) ? '_blank' : undefined} class="mt-6 inline-flex items-center text-sm font-semibold text-teal transition-colors hover:text-teal-600">{l.label} &rarr;</a>
             ))}
@@ -121,7 +134,7 @@ const btns = (links) => links.map((l, i) => ({
 
   if (s.type === 'clients') return (
     <section class="mx-auto max-w-content px-6 py-section">
-      {s.eyebrow && <p class="text-sm font-semibold uppercase tracking-wide text-teal">{s.eyebrow}</p>}
+      {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
       {s.paras.map((p) => <p class="mt-4 max-w-prose text-ink">{p}</p>)}
       <div class="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4">
         {s.items.map((it) => <span class="text-sm font-semibold uppercase tracking-wide text-navy-300">{it.label}</span>)}
@@ -136,7 +149,7 @@ const btns = (links) => links.map((l, i) => ({
   return (
     <section class="mx-auto max-w-content px-6 py-section">
       {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
-      <div class="mt-4 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+      <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
     </section>
   );
 })}
