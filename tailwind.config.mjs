@@ -6,18 +6,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Revenue Strategy / CTAs
+        // Revenue Strategy / CTAs — real RA orange (handoff: 500 #B85A35, 700 #8F4527, 300 #D98A66)
         orange: {
-          100: '#F9E9E3',
-          200: '#F3D1C3',
-          300: '#ECB7A0',
-          400: '#E49A7B',
-          500: '#D96F42',
-          600: '#B65F3D',
-          700: '#925038',
-          800: '#6F4033',
-          900: '#4B302E',
-          DEFAULT: '#D96F42',
+          100: '#F4E5DE',
+          200: '#E8C9BA',
+          300: '#D98A66',
+          400: '#C8724D',
+          500: '#B85A35',
+          600: '#A34F2E',
+          700: '#8F4527',
+          800: '#6B341D',
+          900: '#472313',
+          DEFAULT: '#B85A35',
         },
         // Revenue Platform / headings & structure
         navy: {

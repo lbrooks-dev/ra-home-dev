@@ -24,3 +24,22 @@
     text-wrap: balance;
   }
 }
+
+@layer components {
+  /* Section label: short orange rule + teal uppercase text (matches live dev computed) */
+  .eyebrow {
+    @apply flex items-center gap-3 text-xs font-bold uppercase text-teal-600;
+    letter-spacing: 0.18em;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-8 bg-orange;
+  }
+  /* Subtle blueprint grid — navy (#1F3864) at ~4.5% */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(31 56 100 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(31 56 100 / 0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
