@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Local env / secrets
+.env
+.dev.vars
