@@ -159,18 +159,31 @@ const btns = (links) => links.map((l, i) => ({
     );
   }
 
-  if (s.type === 'clients') return (
-    <section class="mx-auto max-w-content px-6 py-section">
-      {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
-      {s.paras.map((p) => <p class="mt-4 max-w-prose text-ink">{p}</p>)}
-      <div class="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4">
-        {s.items.map((it) => <span class="text-sm font-semibold uppercase tracking-wide text-navy-300">{it.label}</span>)}
-      </div>
-      {s.links.map((l) => (
-        <a href={l.href} class="mt-8 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">{l.label} &rarr;</a>
-      ))}
-    </section>
-  );
+  if (s.type === 'clients') {
+    const LOGOS = [
+      { alt: 'Charles Schwab', file: '/logos/schwab.png' },
+      { alt: 'Natixis',        file: '/logos/natixis.png' },
+      { alt: 'Directions',     file: '/logos/directions.png' },
+      { alt: '4R',             file: '/logos/4r.png' },
+      { alt: 'Imprivata',      file: '/logos/imprivata.png' },
+      { alt: 'Arcserve',       file: '/logos/arcserve.png' },
+      { alt: 'Cognizant',      file: '/logos/cognizant.png' },
+    ];
+    return (
+      <section class="mx-auto max-w-content px-6 py-section">
+        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+        {s.paras.map((p) => <p class="mt-4 max-w-prose text-ink">{p}</p>)}
+        <div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">
+          {LOGOS.map((logo) => (
+            <img src={logo.file} alt={logo.alt} loading="lazy" class="h-8 w-auto justify-self-center object-contain grayscale opacity-60 transition duration-200 hover:opacity-100 hover:grayscale-0" />
+          ))}
+        </div>
+        {s.links.map((l) => (
+          <a href={l.href} class="mt-12 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">{l.label} &rarr;</a>
+        ))}
+      </section>
+    );
+  }
 
   // Generic fallback
   return (
