@@ -19,7 +19,9 @@ const btns = (links) => links.map((l, i) => ({
     <section class="relative overflow-hidden border-b border-navy-100 bg-grid">
       <div class="mx-auto max-w-content px-6 py-20 md:py-28">
         {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
-        <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">{s.heading}</h1>
+        <h1 class="mt-4 max-w-4xl text-4xl leading-[1.05] md:text-6xl">
+          {s.heading.split(/\*\*(.+?)\*\*/).map((p, i) => (i % 2 === 1 ? <span class="text-orange">{p}</span> : p))}
+        </h1>
         {s.paras.map((p) => <p class="mt-6 max-w-prose text-lg text-ink">{p}</p>)}
         {s.links.length > 0 && (
           <div class="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -91,12 +93,7 @@ const btns = (links) => links.map((l, i) => ({
   );
 
   if (s.type === 'authority') {
-    // The three RAOS layers are fixed canon, so the diagram is a constant.
-    const LAYERS = [
-      { tag: 'Layer I',   title: 'Revenue Strategy',   sub: 'Market definition \u00b7 value positioning \u00b7 go-to-market', bar: 'border-l-orange', dot: 'bg-orange' },
-      { tag: 'Layer II',  title: 'Revenue Platform',   sub: 'Brand system \u00b7 revenue technology \u00b7 operations',       bar: 'border-l-navy',   dot: 'bg-navy' },
-      { tag: 'Layer III', title: 'Revenue Production', sub: 'Demand \u00b7 opportunity \u00b7 account expansion',            bar: 'border-l-teal',   dot: 'bg-teal' },
-    ];
+    // Col 1 text is content-driven; the diagram is fixed RAOS canon (SVG).
     return (
       <section class="mx-auto max-w-content px-6 py-section">
         <div class="grid gap-10 md:grid-cols-2 md:items-center">
@@ -109,23 +106,53 @@ const btns = (links) => links.map((l, i) => ({
             ))}
           </div>
           <div class="rounded-card border border-navy-100 bg-grid p-5 md:p-6">
-            <div class="space-y-4">
-              {LAYERS.map((L) => (
-                <div class:list={['rounded-card border border-navy-100 border-l-4 bg-surface p-4', L.bar]}>
-                  <div class="flex items-start justify-between">
-                    <p class="text-xs font-semibold uppercase tracking-wide text-teal">{L.tag}</p>
-                    <div class="flex gap-1">
-                      <span class:list={['h-2 w-2 rounded-sm opacity-40', L.dot]} />
-                      <span class:list={['h-2 w-2 rounded-sm opacity-70', L.dot]} />
-                      <span class:list={['h-2 w-2 rounded-sm', L.dot]} />
-                    </div>
-                  </div>
-                  <h3 class="mt-1 text-xl font-bold text-navy">{L.title}</h3>
-                  <p class="mt-1 text-sm text-ink">{L.sub}</p>
-                </div>
-              ))}
-            </div>
-            <p class="mt-5 text-sm font-semibold text-navy">Human-Orchestrated. AI-Operated.</p>
+            <svg viewBox="0 0 720 416" role="img" aria-label="The three layers of the revenue architecture: Strategy, Platform, and Production, connected by a single orchestration spine." class="font-sans h-auto w-full" xmlns="http://www.w3.org/2000/svg">
+              <g class="stroke-navy-100" stroke-width="1" opacity="0.6">
+                <line x1="96" y1="8" x2="96" y2="412"></line>
+                <line x1="696" y1="8" x2="696" y2="412"></line>
+              </g>
+              <line x1="60" y1="68" x2="60" y2="316" class="stroke-navy-200" stroke-width="2"></line>
+              <g>
+                <line x1="60" y1="68" x2="96" y2="68" class="stroke-navy-200" stroke-width="2"></line>
+                <circle cx="60" cy="68" r="7" class="fill-orange-500"></circle>
+                <circle cx="60" cy="68" r="13" class="fill-none stroke-navy-200" stroke-width="1.5"></circle>
+                <rect x="96" y="16" width="600" height="104" rx="12" class="fill-surface stroke-navy-100" stroke-width="1.5"></rect>
+                <rect x="96" y="16" width="6" height="104" class="fill-orange-500"></rect>
+                <text x="124" y="50" class="fill-teal-600" font-size="13" font-weight="700" letter-spacing="1.5">LAYER I</text>
+                <text x="124" y="82" class="fill-navy" font-size="26" font-weight="800">Revenue Strategy</text>
+                <text x="124" y="106" class="fill-ink" font-size="14" font-weight="500">Market definition · value positioning · go-to-market</text>
+                <g class="fill-orange-500">
+                  <rect x="672" y="40" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="40" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="40" width="8" height="8" rx="2" opacity="0.44"></rect>
+                </g>
+              </g>
+              <g>
+                <line x1="60" y1="192" x2="96" y2="192" class="stroke-navy-200" stroke-width="2"></line>
+                <circle cx="60" cy="192" r="7" class="fill-navy"></circle>
+                <circle cx="60" cy="192" r="13" class="fill-none stroke-navy-200" stroke-width="1.5"></circle>
+                <rect x="96" y="140" width="600" height="104" rx="12" class="fill-surface stroke-navy-100" stroke-width="1.5"></rect>
+                <rect x="96" y="140" width="6" height="104" class="fill-navy"></rect>
+                <text x="124" y="174" class="fill-teal-600" font-size="13" font-weight="700" letter-spacing="1.5">LAYER II</text>
+                <text x="124" y="206" class="fill-navy" font-size="26" font-weight="800">Revenue Platform</text>
+                <text x="124" y="230" class="fill-ink" font-size="14" font-weight="500">Brand system · revenue technology · operations</text>
+                <g class="fill-navy">
+                  <rect x="672" y="164" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="164" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="164" width="8" height="8" rx="2" opacity="0.44"></rect>
+                </g>
+              </g>
+              <g>
+                <line x1="60" y1="316" x2="96" y2="316" class="stroke-navy-200" stroke-width="2"></line>
+                <circle cx="60" cy="316" r="7" class="fill-teal-500"></circle>
+                <circle cx="60" cy="316" r="13" class="fill-none stroke-navy-200" stroke-width="1.5"></circle>
+                <rect x="96" y="264" width="600" height="104" rx="12" class="fill-surface stroke-navy-100" stroke-width="1.5"></rect>
+                <rect x="96" y="264" width="6" height="104" class="fill-teal-500"></rect>
+                <text x="124" y="298" class="fill-teal-600" font-size="13" font-weight="700" letter-spacing="1.5">LAYER III</text>
+                <text x="124" y="330" class="fill-navy" font-size="26" font-weight="800">Revenue Production</text>
+                <text x="124" y="354" class="fill-ink" font-size="14" font-weight="500">Demand · opportunity · account expansion</text>
+                <g class="fill-teal-500">
+                  <rect x="672" y="288" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="288" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="288" width="8" height="8" rx="2" opacity="0.44"></rect>
+                </g>
+              </g>
+              <text x="96" y="398" class="fill-navy" font-size="14" font-weight="700" letter-spacing="0.5">Human-Orchestrated. AI-Operated.</text>
+            </svg>
           </div>
         </div>
       </section>

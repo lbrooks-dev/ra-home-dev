@@ -23,6 +23,9 @@
     @apply font-bold text-navy;
     text-wrap: balance;
   }
+  h1 {
+    letter-spacing: -0.02em;
+  }
 }
 
 @layer components {

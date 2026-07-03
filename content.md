@@ -11,13 +11,13 @@
 
 ### Hero
 
-<!-- id: j15srbz -->
+<!-- id: kw0yefy -->
 
 <!-- type: hero -->
 
 _The firm behind Revenue Architecture®_
 
-#### We don't just design your revenue architecture. We help you operate it.
+#### We don't just design your revenue architecture. **We help you operate it.**
 
 Revenue Architects is the practitioner team that created RAOS — the Revenue Architecture Operating System. We train the teams who run it, certify practitioners, and deliver engagements where the architecture has to hold.
 
@@ -25,7 +25,7 @@ Revenue Architects is the practitioner team that created RAOS — the Revenue Ar
 
 ### The authority
 
-<!-- id: 23xh81h -->
+<!-- id: vwf47nl -->
 
 <!-- type: authority -->
 
@@ -39,7 +39,7 @@ Many firms borrow the words. Revenue Architecture® is ours, and so is the struc
 
 ### The services
 
-<!-- id: f9hcz0q -->
+<!-- id: th1n3am -->
 
 <!-- type: featuregrid -->
 
@@ -55,7 +55,7 @@ The same team that wrote the method delivers all three. Teams and practitioners 
 
 ### The authors
 
-<!-- id: pf7gr32 -->
+<!-- id: 7ubavbc -->
 
 <!-- type: pageintro -->
 
@@ -71,7 +71,7 @@ We take a small number of engagements at a time, and that is the offer, not a li
 
 ### Selected clients
 
-<!-- id: axlrgk9 -->
+<!-- id: 0jz0dgf -->
 
 <!-- type: clients -->
 
@@ -91,7 +91,7 @@ Firms in financial services and high-consideration B2B have trusted the team beh
 
 ### Two ways forward
 
-<!-- id: 2twjjhk -->
+<!-- id: qoxqc49 -->
 
 <!-- type: ctabanner -->
 
