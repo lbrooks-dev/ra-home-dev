@@ -38,6 +38,15 @@
     content: '';
     @apply h-px w-8 bg-orange;
   }
+  /* Letterspacing: wide tracking, no orange rule */
+  .eyebrow-track {
+    @apply inline-block text-xs font-bold uppercase text-teal-600;
+    letter-spacing: 0.18em;
+  }
+  /* Default: plain teal label, normal tracking, no rule */
+  .eyebrow-plain {
+    @apply inline-block text-xs font-semibold uppercase tracking-wide text-teal;
+  }
   /* Subtle blueprint grid — navy (#1F3864) at ~4.5% */
   .bg-grid {
     background-image:

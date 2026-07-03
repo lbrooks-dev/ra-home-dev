@@ -7,6 +7,8 @@ import CtaBlock from './CtaBlock.astro';
 const { sections = [] } = Astro.props;
 
 const accents = ['orange', 'teal', 'navy'];
+// Eyebrow style per section: border (orange rule), letterspacing (wide tracking, no rule), default (plain).
+const ebClass = (s) => (s.eyebrowStyle === 'letterspacing' ? 'eyebrow-track' : s.eyebrowStyle === 'default' ? 'eyebrow-plain' : 'eyebrow');
 // Map a section's links to CtaBlock button variants (first = orange, then teal).
 const btns = (links) => links.map((l, i) => ({
   href: l.href, label: l.label,
@@ -18,7 +20,7 @@ const btns = (links) => links.map((l, i) => ({
   if (s.type === 'hero') return (
     <section class="relative overflow-hidden border-b border-navy-100 bg-grid">
       <div class="mx-auto max-w-content px-6 py-20 md:py-28">
-        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
         <h1 class="mt-4 max-w-4xl text-4xl leading-[1.05] md:text-6xl">
           {s.heading.split(/\*\*(.+?)\*\*/).map((p, i) => (i % 2 === 1 ? <span class="text-orange">{p}</span> : p))}
         </h1>
@@ -60,7 +62,7 @@ const btns = (links) => links.map((l, i) => ({
     ];
     return (
       <section class="mx-auto max-w-content px-6 py-section">
-        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
         {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
         {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
         <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -78,7 +80,7 @@ const btns = (links) => links.map((l, i) => ({
   if (s.type === 'pageintro') return (
     <section class="bg-navy-100/40">
       <div class="mx-auto max-w-content px-6 py-section">
-        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
         {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
         <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
         {s.links.map((l) => (
@@ -98,7 +100,7 @@ const btns = (links) => links.map((l, i) => ({
       <section class="mx-auto max-w-content px-6 py-section">
         <div class="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
-            {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+            {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
             {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
             <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
             {s.links.map((l) => (
@@ -171,7 +173,7 @@ const btns = (links) => links.map((l, i) => ({
     ];
     return (
       <section class="mx-auto max-w-content px-6 py-section">
-        {s.eyebrow && <p class="eyebrow">{s.eyebrow}</p>}
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
         {s.paras.map((p) => <p class="mt-4 max-w-prose text-ink">{p}</p>)}
         <div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">
           {LOGOS.map((logo) => (

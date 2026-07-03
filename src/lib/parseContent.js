@@ -21,14 +21,19 @@ export function parseContent(md) {
     const m = l.match(/^\s*<!--\s*type:\s*(.+?)\s*-->\s*$/i);
     return m ? m[1].trim().toLowerCase() : null;
   };
+  const eyebrowOf = (l) => {
+    const m = l.match(/^\s*<!--\s*eyebrow:\s*(.+?)\s*-->\s*$/i);
+    return m ? m[1].trim().toLowerCase() : null;
+  };
   const isComment = (l) => /^\s*<!--.*-->\s*$/.test(l);
 
   for (const line of lines) {
     if (/^#\s+/.test(line)) { if (!cur) siteTitle = line.replace(/^#\s+/, '').trim(); continue; }
     if (/^##\s+/.test(line)) { if (!cur) pageTitle = line.replace(/^##\s+/, '').trim(); continue; }
-    if (/^###\s+/.test(line)) { if (cur) raw.push(cur); cur = { title: line.replace(/^###\s+/, '').trim(), type: '', body: [] }; continue; }
+    if (/^###\s+/.test(line)) { if (cur) raw.push(cur); cur = { title: line.replace(/^###\s+/, '').trim(), type: '', eyebrowStyle: '', body: [] }; continue; }
     if (!cur) continue;
     const ty = typeOf(line); if (ty) { cur.type = ty; continue; }
+    const eb = eyebrowOf(line); if (eb) { cur.eyebrowStyle = eb; continue; }
     if (isComment(line)) continue;
     cur.body.push(line);
   }
@@ -57,7 +62,7 @@ export function parseContent(md) {
       if (found.length) { links = links.concat(found); continue; }
       paras.push(t);
     }
-    return { type: s.type || 'generic', title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
+    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
   });
 
   return { siteTitle, pageTitle, sections };
