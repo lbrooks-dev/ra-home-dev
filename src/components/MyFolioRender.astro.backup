@@ -1,0 +1,197 @@
+---
+// Renders MyFolio sections using this site's real tokens and components,
+// mirroring the markup patterns in src/pages/index.astro so the output is
+// styled identically. Content comes from MyFolio; the look is RA's.
+import Card from './Card.astro';
+import CtaBlock from './CtaBlock.astro';
+const { sections = [] } = Astro.props;
+
+const accents = ['orange', 'teal', 'navy'];
+// Eyebrow style per section: border (orange rule), letterspacing (wide tracking, no rule), default (plain).
+const ebClass = (s) => (s.eyebrowStyle === 'letterspacing' ? 'eyebrow-track' : s.eyebrowStyle === 'default' ? 'eyebrow-plain' : 'eyebrow');
+// Map a section's links to CtaBlock button variants (first = orange, then teal).
+const btns = (links) => links.map((l, i) => ({
+  href: l.href, label: l.label,
+  variant: i === links.length - 1 ? 'orange' : 'teal',
+  external: /^https?:/i.test(l.href),
+}));
+---
+{sections.map((s) => {
+  if (s.type === 'hero') return (
+    <section class="relative overflow-hidden border-b border-navy-100 bg-grid">
+      <div class="mx-auto max-w-content px-6 py-20 md:py-28">
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
+        <h1 class="mt-4 max-w-4xl text-4xl leading-[1.05] md:text-6xl">
+          {s.heading.split(/\*\*(.+?)\*\*/).map((p, i) => (i % 2 === 1 ? <span class="text-orange">{p}</span> : p))}
+        </h1>
+        {s.paras.map((p) => <p class="mt-6 max-w-prose text-lg text-ink">{p}</p>)}
+        {s.links.length > 0 && (
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            {s.links.map((l, i) => (
+              <a href={l.href} class:list={['inline-flex items-center justify-center rounded-card px-6 py-3 text-sm font-semibold transition-colors',
+                i === 0 ? 'bg-orange text-surface hover:bg-orange-600' : 'border border-navy text-navy hover:bg-navy hover:text-surface']}>{l.label}</a>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'stats') return (
+    <section class="mx-auto max-w-content px-6 py-section">
+      {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
+      {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        {s.items.map((it) => (
+          <div>
+            <div class="text-4xl font-bold text-orange md:text-5xl">{it.label}</div>
+            <div class="mt-2 text-sm font-semibold uppercase tracking-wide text-ink">{it.text}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'featuregrid') {
+    // Fixed presentation per card position (matches dev: teal, orange, orange).
+    // Editable copy (title + body) still comes from content.
+    const CARD_META = [
+      { eyebrow: 'Enablement',       accent: 'teal',   cta: 'See training',        href: '/services#training' },
+      { eyebrow: 'Credential',       accent: 'orange', cta: 'Become certified',    href: '/services#certification' },
+      { eyebrow: 'With the authors', accent: 'orange', cta: 'Scope an engagement', href: '/engage' },
+    ];
+    return (
+      <section class="mx-auto max-w-content px-6 py-section">
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
+        {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
+        {s.paras.map((p) => <p class="mt-3 max-w-prose text-ink">{p}</p>)}
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {s.items.map((it, i) => {
+            const meta = CARD_META[i] ?? { accent: accents[i % accents.length] };
+            return (
+              <Card title={it.label} eyebrow={meta.eyebrow} accent={meta.accent} href={meta.href} cta={meta.cta}>{it.text}</Card>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
+  if (s.type === 'pageintro') return (
+    <section class="bg-navy-100/40">
+      <div class="mx-auto max-w-content px-6 py-section">
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
+        {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
+        <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+        {s.links.map((l) => (
+          <a href={l.href} class="mt-6 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">{l.label} &rarr;</a>
+        ))}
+      </div>
+    </section>
+  );
+
+  if (s.type === 'ctabanner') return (
+    <CtaBlock eyebrow={s.eyebrow} heading={s.heading} body={s.paras.join(' ')} buttons={btns(s.links)} />
+  );
+
+  if (s.type === 'authority') {
+    // Col 1 text is content-driven; the diagram is fixed RAOS canon (SVG).
+    return (
+      <section class="mx-auto max-w-content px-6 py-section">
+        <div class="grid gap-10 md:grid-cols-2 md:items-center">
+          <div>
+            {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
+            {s.heading && <h2 class="mt-2 text-2xl md:text-3xl">{s.heading}</h2>}
+            <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+            {s.links.map((l) => (
+              <a href={l.href} rel={/^https?:/i.test(l.href) ? 'noopener' : undefined} target={/^https?:/i.test(l.href) ? '_blank' : undefined} class="mt-6 inline-flex items-center text-sm font-semibold text-teal transition-colors hover:text-teal-600">{l.label} &rarr;</a>
+            ))}
+          </div>
+          <div class="rounded-card border border-navy-100 bg-grid p-5 md:p-6">
+            <svg viewBox="0 0 720 416" role="img" aria-label="The three layers of the revenue architecture: Strategy, Platform, and Production, connected by a single orchestration spine." class="font-sans h-auto w-full" xmlns="http://www.w3.org/2000/svg">
+              <g class="stroke-navy-100" stroke-width="1" opacity="0.6">
+                <line x1="96" y1="8" x2="96" y2="412"></line>
+                <line x1="696" y1="8" x2="696" y2="412"></line>
+              </g>
+              <line x1="60" y1="68" x2="60" y2="316" class="stroke-navy-200" stroke-width="2"></line>
+              <g>
+                <line x1="60" y1="68" x2="96" y2="68" class="stroke-navy-200" stroke-width="2"></line>
+                <circle cx="60" cy="68" r="7" class="fill-orange-500"></circle>
+                <circle cx="60" cy="68" r="13" class="fill-none stroke-navy-200" stroke-width="1.5"></circle>
+                <rect x="96" y="16" width="600" height="104" rx="12" class="fill-surface stroke-navy-100" stroke-width="1.5"></rect>
+                <rect x="96" y="16" width="6" height="104" class="fill-orange-500"></rect>
+                <text x="124" y="50" class="fill-teal-600" font-size="13" font-weight="700" letter-spacing="1.5">LAYER I</text>
+                <text x="124" y="82" class="fill-navy" font-size="26" font-weight="800">Revenue Strategy</text>
+                <text x="124" y="106" class="fill-ink" font-size="14" font-weight="500">Market definition · value positioning · go-to-market</text>
+                <g class="fill-orange-500">
+                  <rect x="672" y="40" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="40" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="40" width="8" height="8" rx="2" opacity="0.44"></rect>
+                </g>
+              </g>
+              <g>
+                <line x1="60" y1="192" x2="96" y2="192" class="stroke-navy-200" stroke-width="2"></line>
+                <circle cx="60" cy="192" r="7" class="fill-navy"></circle>
+                <circle cx="60" cy="192" r="13" class="fill-none stroke-navy-200" stroke-width="1.5"></circle>
+                <rect x="96" y="140" width="600" height="104" rx="12" class="fill-surface stroke-navy-100" stroke-width="1.5"></rect>
+                <rect x="96" y="140" width="6" height="104" class="fill-navy"></rect>
+                <text x="124" y="174" class="fill-teal-600" font-size="13" font-weight="700" letter-spacing="1.5">LAYER II</text>
+                <text x="124" y="206" class="fill-navy" font-size="26" font-weight="800">Revenue Platform</text>
+                <text x="124" y="230" class="fill-ink" font-size="14" font-weight="500">Brand system · revenue technology · operations</text>
+                <g class="fill-navy">
+                  <rect x="672" y="164" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="164" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="164" width="8" height="8" rx="2" opacity="0.44"></rect>
+                </g>
+              </g>
+              <g>
+                <line x1="60" y1="316" x2="96" y2="316" class="stroke-navy-200" stroke-width="2"></line>
+                <circle cx="60" cy="316" r="7" class="fill-teal-500"></circle>
+                <circle cx="60" cy="316" r="13" class="fill-none stroke-navy-200" stroke-width="1.5"></circle>
+                <rect x="96" y="264" width="600" height="104" rx="12" class="fill-surface stroke-navy-100" stroke-width="1.5"></rect>
+                <rect x="96" y="264" width="6" height="104" class="fill-teal-500"></rect>
+                <text x="124" y="298" class="fill-teal-600" font-size="13" font-weight="700" letter-spacing="1.5">LAYER III</text>
+                <text x="124" y="330" class="fill-navy" font-size="26" font-weight="800">Revenue Production</text>
+                <text x="124" y="354" class="fill-ink" font-size="14" font-weight="500">Demand · opportunity · account expansion</text>
+                <g class="fill-teal-500">
+                  <rect x="672" y="288" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="288" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="288" width="8" height="8" rx="2" opacity="0.44"></rect>
+                </g>
+              </g>
+              <text x="96" y="398" class="fill-navy" font-size="14" font-weight="700" letter-spacing="0.5">Human-Orchestrated. AI-Operated.</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (s.type === 'clients') {
+    const LOGOS = [
+      { alt: 'Charles Schwab', file: '/logos/schwab.png' },
+      { alt: 'Natixis',        file: '/logos/natixis.png' },
+      { alt: 'Directions',     file: '/logos/directions.png' },
+      { alt: '4R',             file: '/logos/4r.png' },
+      { alt: 'Imprivata',      file: '/logos/imprivata.png' },
+      { alt: 'Arcserve',       file: '/logos/arcserve.png' },
+      { alt: 'Cognizant',      file: '/logos/cognizant.png' },
+    ];
+    return (
+      <section class="mx-auto max-w-content px-6 py-section">
+        {s.eyebrow && <p class={ebClass(s)}>{s.eyebrow}</p>}
+        {s.paras.map((p) => <p class="mt-4 max-w-prose text-ink">{p}</p>)}
+        <div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">
+          {LOGOS.map((logo) => (
+            <img src={logo.file} alt={logo.alt} loading="lazy" class="h-8 w-auto justify-self-center object-contain grayscale opacity-60 transition duration-200 hover:opacity-100 hover:grayscale-0" />
+          ))}
+        </div>
+        {s.links.map((l) => (
+          <a href={l.href} class="mt-12 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">{l.label} &rarr;</a>
+        ))}
+      </section>
+    );
+  }
+
+  // Generic fallback
+  return (
+    <section class="mx-auto max-w-content px-6 py-section">
+      {s.heading && <h2 class="text-2xl md:text-3xl">{s.heading}</h2>}
+      <div class="mt-6 max-w-prose space-y-4 text-ink">{s.paras.map((p) => <p>{p}</p>)}</div>
+    </section>
+  );
+})}
