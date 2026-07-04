@@ -7,13 +7,16 @@
 ## Website Home Demo
 
 <!-- id: qtpf3hf -->
+<!-- status: active -->
 <!-- sharing: public -->
 
 ### Hero
 
-<!-- id: kw0yefy -->
+<!-- id: vd4lj9e -->
 
 <!-- type: hero -->
+
+<!-- tone: dark -->
 
 _The firm behind Revenue Architecture®_
 
@@ -25,7 +28,7 @@ Revenue Architects is the practitioner team that created RAOS — the Revenue Ar
 
 ### The authority
 
-<!-- id: vwf47nl -->
+<!-- id: 74ybsiq -->
 
 <!-- type: authority -->
 
@@ -39,9 +42,11 @@ Many firms borrow the words. Revenue Architecture® is ours, and so is the struc
 
 ### The services
 
-<!-- id: th1n3am -->
+<!-- id: v1qxhd5 -->
 
 <!-- type: featuregrid -->
+
+<!-- tone: neutral -->
 
 _The services_
 
@@ -55,9 +60,11 @@ The same team that wrote the method delivers all three. Teams and practitioners 
 
 ### The authors
 
-<!-- id: 7ubavbc -->
+<!-- id: fs7wi82 -->
 
 <!-- type: pageintro -->
+
+<!-- tone: light -->
 
 _The authors_
 
@@ -71,9 +78,11 @@ We take a small number of engagements at a time, and that is the offer, not a li
 
 ### Selected clients
 
-<!-- id: 0jz0dgf -->
+<!-- id: jed5g6c -->
 
 <!-- type: clients -->
+
+<!-- tone: neutral -->
 
 _Selected clients_
 
@@ -91,9 +100,11 @@ Firms in financial services and high-consideration B2B have trusted the team beh
 
 ### Two ways forward
 
-<!-- id: qoxqc49 -->
+<!-- id: rbb3ryo -->
 
 <!-- type: ctabanner -->
+
+<!-- tone: neutral -->
 
 _Two ways forward_
 
