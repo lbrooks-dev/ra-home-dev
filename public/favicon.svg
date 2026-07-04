@@ -1,6 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#1F3864"/>
-  <path d="M5 9 L12 16 L5 23 Z" fill="#c94a26"/>
-  <path d="M12.5 9 L19.5 16 L12.5 23 Z" fill="#F4F6FB"/>
-  <path d="M20 9 L27 16 L20 23 Z" fill="#5FC8BF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 843 843">
+<style type="text/css">
+	.st0{fill:#686A6A;}
+	.st1{fill:#919394;}
+	.st2{fill:#BCBDC0;}
+	.st3{fill:#686A6A;}
+	.st4{fill:url(#SVGID_1_);}
+</style>
+<g transform="translate(0.0,56.4)"><g>
+	<g>
+		<polygon class="st0" points="120.6,625.9 0.2,626 60.5,730.2 180.9,730.2 		"/>
+		<polygon class="st1" points="241.1,625.9 180.8,521.6 120.6,625.9 180.9,730.2 		"/>
+		<polygon class="st2" points="662.4,521.4 542,521.4 481.9,625.7 602.3,625.7 		"/>
+		<polygon class="st3" points="60.3,730.2 0,625.7 602.1,625.7 361,208.7 481.5,208.7 722.5,625.7 782.7,730.2 		"/>
+		
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="180.6" y1="369.1" x2="843" y2="369.1" gradientTransform="matrix(1 0 0 -1 0 734)">
+			<stop  offset="0" style="stop-color:#F69F33"/>
+			<stop  offset="1" style="stop-color:#F44F22"/>
+		</linearGradient>
+		<polygon class="st4" points="843,625.5 782.8,729.8 481.5,208.6 481.5,208.6 240.9,625.8 180.6,521.5 481.4,0 541.7,104.3 
+			541.7,104.3 		"/>
+		<path class="st2" d="M421.4,104.3L421.4,104.3L421.4,104.3l-60.2,104.3l0,0l0,0l0,0L301,312.9l0,0l0,0l0,0l-60,104.3l0,0
+			l-60.2,104.3l0,0l120.4-0.1l0,0l120.4-0.1l0,0l120.4-0.1l-60.2,104.3l-120.4,0.1l0,0L241,625.7l0,0l-120.4,0.1l0,0L0.3,625.9l0,0
+			l60.2-104.3h0.9l0,0h-0.9l60.2-104.3h0.9l0,0h-0.9l60-104.3h0.8l0,0h-0.8l60.2-104.3h0.6l0,0h-0.6L301,104.4h0.3l0,0H301
+			L361.2,0.1L481.6,0L421.4,104.3L421.4,104.3z"/>
+	</g>
+</g></g>
 </svg>

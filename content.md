@@ -98,6 +98,10 @@ We take a small number of engagements at a time, and that is the offer, not a li
 
 [Meet the firm](/about)
 
+`![John](/authors/john.png)`
+
+`![Sherwin](/authors/sherwin.png)`
+
 ### Selected clients
 
 <!-- id: jed5g6c -->

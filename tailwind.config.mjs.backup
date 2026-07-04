@@ -12,12 +12,12 @@ export default {
           200: '#E8C9BA',
           300: '#D98A66',
           400: '#C8724D',
-          500: '#B85A35',
-          600: '#A34F2E',
+          500: '#c94a26',
+          600: '#B23E20',
           700: '#8F4527',
           800: '#6B341D',
           900: '#472313',
-          DEFAULT: '#B85A35',
+          DEFAULT: '#c94a26',
         },
         // Revenue Platform / headings & structure
         navy: {

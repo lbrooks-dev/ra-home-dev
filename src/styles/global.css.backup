@@ -69,9 +69,14 @@
 .tone-dark .eyebrow, .tone-dark .eyebrow-track, .tone-dark .eyebrow-plain { color: #E9C3A8; }
 .tone-dark .eyebrow::before { background: #D98A66; }
 /* Arrow links (the text-orange utility, not solid buttons) per tone */
-.tone-light .text-orange, .tone-neutral .text-orange { color: #8F4527; }
-.tone-dark .text-orange { color: #EDB08F; }
-.tone-dark .hover\:text-orange-600:hover { color: #F2C0A0; }
+.tone-light .text-orange, .tone-neutral .text-orange { color: #c94a26; }
+.tone-dark .text-orange { color: #EE9E76; }
+.tone-dark .hover\:text-orange-600:hover { color: #F2B291; }
+/* Teal arrow links (e.g. "See the full method") need lightening on dark */
+.tone-dark .text-teal { color: #7FC6C8; }
+.tone-dark .hover\:text-teal-600:hover { color: #9CD3D0; }
+/* Authority-diagram footnote sits on the section bg, so it follows the tone */
+.tone-dark .ra-auth-note { fill: #D7DCE6; }
 /* Cards on dark become translucent light panels */
 .tone-dark .rounded-card { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); box-shadow: none; }
 .tone-dark .rounded-card h3 { color: #FFFFFF; }
@@ -162,13 +167,13 @@ div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-top: 2.5rem
 .ra-fgcard .fgc-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #007B80; margin: 0 0 0.25rem; }
 .ra-fgcard .fgc-title { font-size: 1.25rem; font-weight: 700; color: #17294F; margin: 0 0 0.5rem; line-height: 1.2; }
 .ra-fgcard .fgc-desc { font-size: 0.9rem; line-height: 1.6; color: #3A3A4A; flex: 1; margin: 0; }
-.ra-fgcard .fgc-link { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: #C44620; text-decoration: none; }
+.ra-fgcard .fgc-link { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: #c94a26; text-decoration: none; }
 .ra-fgcard .fgc-link:hover { text-decoration: underline; }
-.ra-fg-topborder .ra-fgcard, .ra-fg-darktop .ra-fgcard, .ra-fg-alt .ra-fgcard { border-top: 4px solid var(--bt, #C44620); }
-.ra-fg-icon .ra-fgcard .fgc-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.6rem; background: var(--bt, #C44620); color: #fff; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
-.ra-fg-line .ra-fgcard .fgc-line { width: 2rem; height: 3px; border-radius: 2px; background: var(--bt, #C44620); margin-bottom: 1rem; }
+.ra-fg-topborder .ra-fgcard, .ra-fg-darktop .ra-fgcard, .ra-fg-alt .ra-fgcard { border-top: 4px solid var(--bt, #c94a26); }
+.ra-fg-icon .ra-fgcard .fgc-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.6rem; background: var(--bt, #c94a26); color: #fff; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.ra-fg-line .ra-fgcard .fgc-line { width: 2rem; height: 3px; border-radius: 2px; background: var(--bt, #c94a26); margin-bottom: 1rem; }
 .ra-fg-titlebg .ra-fgcard { padding: 0; overflow: hidden; align-items: stretch; }
-.ra-fg-titlebg .ra-fgcard .fgc-band { background: var(--bt, #C44620); color: #fff; font-weight: 700; font-size: 1.1rem; padding: 0.85rem 1.25rem; }
+.ra-fg-titlebg .ra-fgcard .fgc-band { background: var(--bt, #c94a26); color: #fff; font-weight: 700; font-size: 1.1rem; padding: 0.85rem 1.25rem; }
 .ra-fg-titlebg .ra-fgcard .fgc-body { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; padding: 1.25rem; align-items: flex-start; }
 .tone-dark .ra-fgcard { background: #1C2E52; border-color: rgb(255 255 255 / 0.12); box-shadow: none; }
 .tone-dark .ra-fgcard .fgc-title { color: #F4F6FB; }

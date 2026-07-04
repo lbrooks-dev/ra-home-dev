@@ -15,7 +15,7 @@ const isExt = (href) => /^https?:/i.test(href || "");
 
 // CTA Banner palettes (ported verbatim from the styling demo).
 const CTA_COLORS = {
-  orange: { fill: "#C44620", accent: "#C44620", tint: "#FBEFE9" },
+  orange: { fill: "#c94a26", accent: "#c94a26", tint: "#FBEFE9" },
   teal: { fill: "#007B80", accent: "#007B80", tint: "#E3F0EF" },
   navy: { fill: "#1F3864", accent: "#1F3864", tint: "#EAEEF5" },
   lightteal: { fill: "#E3F0EF", accent: "#007B80", tint: "#E3F0EF" },
@@ -53,7 +53,6 @@ const eyebrowP = (s) => (s.eyebrow ? `<p class="${ebClass(s)}">${esc(s.eyebrow)}
 
 // The RAOS three-layer diagram is fixed canon (not content-driven) — verbatim SVG.
 const AUTHORITY_SVG = `<svg viewBox="0 0 720 416" role="img" aria-label="The three layers of the revenue architecture: Strategy, Platform, and Production, connected by a single orchestration spine." class="font-sans h-auto w-full" xmlns="http://www.w3.org/2000/svg">
-  <g class="stroke-navy-100" stroke-width="1" opacity="0.6"><line x1="96" y1="8" x2="96" y2="412"></line><line x1="696" y1="8" x2="696" y2="412"></line></g>
   <line x1="60" y1="68" x2="60" y2="316" class="stroke-navy-200" stroke-width="2"></line>
   <g>
     <line x1="60" y1="68" x2="96" y2="68" class="stroke-navy-200" stroke-width="2"></line>
@@ -88,7 +87,7 @@ const AUTHORITY_SVG = `<svg viewBox="0 0 720 416" role="img" aria-label="The thr
     <text x="124" y="354" class="fill-ink" font-size="14" font-weight="500">Demand · opportunity · account expansion</text>
     <g class="fill-teal-500"><rect x="672" y="288" width="8" height="8" rx="2" opacity="1"></rect><rect x="656" y="288" width="8" height="8" rx="2" opacity="0.72"></rect><rect x="640" y="288" width="8" height="8" rx="2" opacity="0.44"></rect></g>
   </g>
-  <text x="96" y="398" class="fill-navy" font-size="14" font-weight="700" letter-spacing="0.5">Human-Orchestrated. AI-Operated.</text>
+  <text x="96" y="398" class="ra-auth-note fill-navy" font-size="14" font-weight="700" letter-spacing="0.5">Human-Orchestrated. AI-Operated.</text>
 </svg>`;
 
 const CLIENT_LOGOS = [
@@ -195,8 +194,8 @@ function renderOne(s) {
   if (s.type === "featuregrid") {
     const V = ["topborder", "titlebg", "icon", "darktop", "line", "alt"];
     const variant = V.includes(s.fgVariant) ? s.fgVariant : "topborder";
-    const TRI = ["#C44620", "#1F3864", "#007B80"];
-    const COLS = variant === "darktop" ? ["#1F3864", "#1F3864", "#1F3864"] : variant === "alt" ? ["#C44620", "#007B80", "#C44620"] : TRI;
+    const TRI = ["#c94a26", "#1F3864", "#007B80"];
+    const COLS = variant === "darktop" ? ["#1F3864", "#1F3864", "#1F3864"] : variant === "alt" ? ["#c94a26", "#007B80", "#c94a26"] : TRI;
     const cards = items
       .map((it, i) => {
         const m = FEATURE_CARD_META[i] || {};
