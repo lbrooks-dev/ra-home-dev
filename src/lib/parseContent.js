@@ -37,6 +37,10 @@ export function parseContent(md) {
     const m = l.match(/^\s*<!--\s*bg:\s*(.+?)\s*-->\s*$/i);
     return m ? m[1].trim().toLowerCase() : null;
   };
+  const ctaKey = (l, key) => {
+    const m = l.match(new RegExp('^\\s*<!--\\s*' + key + ':\\s*(.+?)\\s*-->\\s*$', 'i'));
+    return m ? m[1].trim().toLowerCase() : null;
+  };
   const isComment = (l) => /^\s*<!--.*-->\s*$/.test(l);
 
   for (const line of lines) {
@@ -49,6 +53,11 @@ export function parseContent(md) {
     const tn = toneOf(line); if (tn) { cur.tone = tn; continue; }
     const al = alignOf(line); if (al) { cur.align = al; continue; }
     const bgv = bgOf(line); if (bgv) { cur.bg = bgv; continue; }
+    const cn = ctaKey(line, 'ctaname'); if (cn) { cur.ctaName = cn; continue; }
+    const cty = ctaKey(line, 'ctatype'); if (cty) { cur.ctaType = cty; continue; }
+    const cco = ctaKey(line, 'ctacolor'); if (cco) { cur.ctaColor = cco; continue; }
+    const cb1 = ctaKey(line, 'ctab1'); if (cb1) { const p = cb1.split('/'); cur.ctaB1Type = p[0]; cur.ctaB1Color = p[1] || 'default'; continue; }
+    const cb2 = ctaKey(line, 'ctab2'); if (cb2) { const p = cb2.split('/'); cur.ctaB2Type = p[0]; cur.ctaB2Color = p[1] || 'default'; continue; }
     if (isComment(line)) continue;
     cur.body.push(line);
   }
@@ -77,7 +86,7 @@ export function parseContent(md) {
       if (found.length) { links = links.concat(found); continue; }
       paras.push(t);
     }
-    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
+    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
   });
 
   return { siteTitle, pageTitle, sections };

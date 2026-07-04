@@ -98,3 +98,43 @@
 }
 .secbg-gradient { background-image: linear-gradient(180deg, rgb(31 56 100 / 0.06), transparent 70%); }
 .tone-dark.secbg-gradient { background-image: linear-gradient(180deg, rgb(255 255 255 / 0.07), transparent 70%); }
+/* ---- CTA Banner variants (boxed / full / bar; colors set inline by renderer) ---- */
+.cta-section { position: relative; }
+.st-style-light { background: #FFFFFF; }
+.st-style-neutral { background: #EEF1F6; }
+.st-style-dark { background: #17294F; }
+.cta-inner { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
+.cta-box { border-radius: .75rem; padding: 2.5rem 2rem; }
+.cta-eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .5rem; }
+.cta-h2 { font-size: clamp(1.5rem, 3vw, 1.875rem); font-weight: 800; line-height: 1.15; margin: 0; max-width: 62ch; }
+.cta-desc { margin: 1rem 0 0; max-width: 62ch; line-height: 1.6; font-size: 1rem; }
+.cta-actions { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+@media (min-width: 640px) { .cta-actions { flex-direction: row; } }
+.cta-btn { display: inline-flex; align-items: center; justify-content: center; border-radius: .6rem; padding: .7rem 1.4rem; font-size: .875rem; font-weight: 700; text-decoration: none; transition: opacity .2s; }
+.cta-btn:hover { opacity: .88; }
+.cta-link { padding: .2rem 0; border-radius: 0; }
+.cta-link:hover { text-decoration: underline; opacity: 1; }
+.cta-align-center .cta-box { text-align: center; }
+.cta-align-center .cta-h2, .cta-align-center .cta-desc { margin-left: auto; margin-right: auto; }
+.cta-align-center .cta-actions { justify-content: center; }
+.cta-type-bar .cta-box { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding: 1.5rem 2rem; }
+.cta-type-bar .cta-textwrap { flex: 1; min-width: 240px; }
+.cta-type-bar .cta-h2 { font-size: 1.25rem; }
+.cta-type-bar .cta-desc { display: none; }
+.cta-type-bar .cta-actions { margin-top: 0; flex-direction: row; }
+.cta-align-center.cta-type-bar .cta-box { justify-content: center; }
+.cta-align-right .cta-box { text-align: right; }
+.cta-align-right .cta-h2, .cta-align-right .cta-desc { margin-left: auto; margin-right: 0; }
+.cta-align-right .cta-actions { justify-content: flex-end; }
+.cta-align-right.cta-type-bar .cta-box { justify-content: flex-end; }
+.cta-fullinner { max-width: 1280px; margin: 0 auto; padding: 5rem 1.5rem; }
+.cta-name-full.cta-align-center .cta-fullinner { text-align: center; }
+.cta-name-full .cta-h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); font-weight: 800; line-height: 1.12; margin: 0; }
+.cta-name-full .cta-desc { margin: .85rem 0 0; font-size: 1.05rem; line-height: 1.55; }
+.cta-name-full.cta-align-center .cta-h2 { max-width: 26ch; margin-left: auto; margin-right: auto; }
+.cta-name-full.cta-align-center .cta-desc { max-width: 60ch; margin-left: auto; margin-right: auto; }
+.cta-name-full .cta-actions { display: flex; flex-direction: row; gap: 1rem; margin-top: 2rem; }
+.cta-name-full.cta-align-center .cta-actions { justify-content: center; }
+.cta-name-full.cta-align-right .cta-fullinner { text-align: right; }
+.cta-name-full.cta-align-right .cta-h2, .cta-name-full.cta-align-right .cta-desc { margin-left: auto; margin-right: 0; }
+.cta-name-full.cta-align-right .cta-actions { justify-content: flex-end; }

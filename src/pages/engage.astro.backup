@@ -7,7 +7,7 @@ import Base from '../layouts/Base.astro';
   description="Engage the authors of Revenue Architecture. The FACT Intake — an agentic scoping conversation — is launching soon. For now, reach us directly."
 >
   <section class="mx-auto max-w-content px-6 py-20 md:py-28">
-    <p class="text-sm font-semibold uppercase tracking-wide text-teal">Engage</p>
+    <p class="eyebrow">Engage</p>
     <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
       Tell us what you are trying to fix.
     </h1>
