@@ -127,6 +127,27 @@ function card({ title, eyebrow, href, cta, accent, body }) {
 function renderOne(s) {
   const paras = s.paras || [], items = s.items || [], links = s.links || [];
 
+  if (s.type === "nav") {
+    // Brand mark: the site logo (matches Nav.astro).
+    const brand = `<a href="/" class="flex items-center" aria-label="Home"><img src="/brand/ra-logo.svg" alt="Revenue Architects" class="h-10 w-auto" /></a>`;
+    // Links: the last one renders as the orange button; the rest as text links.
+    const btn = links.length ? links[links.length - 1] : null;
+    const textLinks = links.length > 1 ? links.slice(0, -1) : [];
+    const lis = textLinks
+      .map((l) => `<li><a href="${esc(l.href)}" class="text-ink transition-colors hover:text-orange">${esc(l.label)}</a></li>`)
+      .join("");
+    const btnLi = btn
+      ? `<li><a href="${esc(btn.href)}" class="rounded-card bg-orange px-4 py-2 font-semibold text-surface transition-colors hover:bg-orange-600">${esc(btn.label)}</a></li>`
+      : "";
+    return (
+      `<header class="border-b border-navy-100 bg-surface">` +
+      `<nav class="mx-auto flex max-w-content items-center justify-between gap-6 px-6 py-4" aria-label="Primary">` +
+      brand +
+      `<ul class="flex items-center gap-6 text-sm font-medium">${lis}${btnLi}</ul>` +
+      `</nav></header>`
+    );
+  }
+
   if (s.type === "hero") {
     const logoBg = s.heroLogo
       ? `<div class="ra-herologo" aria-hidden="true"><img src="/brand/ra-symbol.svg" alt="" /></div>`
@@ -388,7 +409,7 @@ function renderOne(s) {
 // Wrap each section in its tone band (mirrors the .astro wrapper).
 export function renderSection(s) {
   const id = s && s.id ? ` data-section-id="${esc(s.id)}"` : "";
-  if (s && (s.type === "ctabanner" || s.type === "footer")) return `<div${id}>${renderOne(s)}</div>`;
+  if (s && (s.type === "ctabanner" || s.type === "footer" || s.type === "nav")) return `<div${id}>${renderOne(s)}</div>`;
   const cls = [toneClass(s), alignClass(s), bgClass(s)].filter(Boolean).join(" ");
   return `<div class="${cls}"${id}>${renderOne(s)}</div>`;
 }
