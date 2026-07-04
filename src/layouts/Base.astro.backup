@@ -7,6 +7,7 @@ const {
   title = 'Revenue Architects',
   description = 'Revenue Architects is the practitioner team that created and stewards Revenue Architecture and RAOS — the Revenue Architecture Operating System.',
   showFooter = true,
+  showNav = true,
 } = Astro.props;
 
 const fullTitle = title === 'Revenue Architects' ? title : `${title} — Revenue Architects`;
@@ -38,7 +39,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://revenuearch
     >
       Skip to content
     </a>
-    <Nav />
+    {showNav && <Nav />}
     <main id="main" class="flex-1">
       <slot />
     </main>
