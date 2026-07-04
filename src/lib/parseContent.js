@@ -61,6 +61,7 @@ export function parseContent(md) {
     const lo = ctaKey(line, 'layout'); if (lo) { cur.layout = lo; continue; }
     const csx = ctaKey(line, 'clientstyle'); if (csx) { cur.clientStyle = csx; continue; }
     if (/^\s*<!--\s*herologo\s*-->\s*$/i.test(line)) { cur.heroLogo = true; continue; }
+    const fgn = ctaKey(line, 'fgname'); if (fgn) { cur.fgVariant = fgn; continue; }
     if (isComment(line)) continue;
     cur.body.push(line);
   }
@@ -91,7 +92,7 @@ export function parseContent(md) {
       if (found.length) { links = links.concat(found); continue; }
       paras.push(t);
     }
-    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', layout: s.layout || 'default', heroLogo: !!s.heroLogo, clientStyle: (['bare','boxed'].includes(s.clientStyle) ? s.clientStyle : 'bare'), title: s.title, eyebrow, heading: heading || s.title, paras, items, images, links };
+    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', layout: s.layout || 'default', heroLogo: !!s.heroLogo, clientStyle: (['bare','boxed'].includes(s.clientStyle) ? s.clientStyle : 'bare'), fgVariant: (['topborder','titlebg','icon','darktop','line','alt'].includes(s.fgVariant) ? s.fgVariant : 'topborder'), title: s.title, eyebrow, heading: heading || s.title, paras, items, images, links };
   });
 
   return { siteTitle, pageTitle, sections };

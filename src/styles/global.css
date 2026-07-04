@@ -139,8 +139,8 @@
 .cta-name-full.cta-align-right .cta-h2, .cta-name-full.cta-align-right .cta-desc { margin-left: auto; margin-right: 0; }
 .cta-name-full.cta-align-right .cta-actions { justify-content: flex-end; }
 /* ---- Hero rotating logo watermark (option: herologo) ---- */
-.ra-herologo { position: absolute; right: -6%; top: 50%; transform: translateY(-50%); width: min(58vw, 620px); opacity: 0.15; pointer-events: none; z-index: 0; }
-.ra-herologo img { display: block; width: 100%; height: auto; transform-origin: 50% 50%; animation: ra-spin 90s linear infinite; }
+.ra-herologo { position: absolute; right: -8%; top: 50%; transform: translateY(-50%); width: min(88vw, 1000px); opacity: 0.10; pointer-events: none; z-index: 0; }
+.ra-herologo img { display: block; width: 100%; height: auto; transform-origin: 50% 50%; animation: ra-spin 120s linear infinite; }
 @keyframes ra-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .ra-herologo img { animation: none; } }
 /* ---- Boxed client logos (option: clientstyle=boxed; first logo filled) ---- */
@@ -155,3 +155,23 @@
    keeping the inner box vertically centered (equal padding top and bottom) */
 div:has(> .cta-section):has(+ div > footer) .cta-inner,
 div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+/* ---- Feature grid card variants (option: fgname) ---- */
+.ra-fggrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+@media (max-width: 780px) { .ra-fggrid { grid-template-columns: 1fr; } }
+.ra-fgcard { display: flex; flex-direction: column; align-items: flex-start; text-align: left; border-radius: 0.75rem; background: #FFFFFF; border: 1px solid #DDE1E8; box-shadow: 0 1px 2px rgb(23 41 79 / 0.05); padding: 1.5rem; height: 100%; }
+.ra-fgcard .fgc-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #007B80; margin: 0 0 0.25rem; }
+.ra-fgcard .fgc-title { font-size: 1.25rem; font-weight: 700; color: #17294F; margin: 0 0 0.5rem; line-height: 1.2; }
+.ra-fgcard .fgc-desc { font-size: 0.9rem; line-height: 1.6; color: #3A3A4A; flex: 1; margin: 0; }
+.ra-fgcard .fgc-link { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: #C44620; text-decoration: none; }
+.ra-fgcard .fgc-link:hover { text-decoration: underline; }
+.ra-fg-topborder .ra-fgcard, .ra-fg-darktop .ra-fgcard, .ra-fg-alt .ra-fgcard { border-top: 4px solid var(--bt, #C44620); }
+.ra-fg-icon .ra-fgcard .fgc-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.6rem; background: var(--bt, #C44620); color: #fff; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.ra-fg-line .ra-fgcard .fgc-line { width: 2rem; height: 3px; border-radius: 2px; background: var(--bt, #C44620); margin-bottom: 1rem; }
+.ra-fg-titlebg .ra-fgcard { padding: 0; overflow: hidden; align-items: stretch; }
+.ra-fg-titlebg .ra-fgcard .fgc-band { background: var(--bt, #C44620); color: #fff; font-weight: 700; font-size: 1.1rem; padding: 0.85rem 1.25rem; }
+.ra-fg-titlebg .ra-fgcard .fgc-body { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; padding: 1.25rem; align-items: flex-start; }
+.tone-dark .ra-fgcard { background: #1C2E52; border-color: rgb(255 255 255 / 0.12); box-shadow: none; }
+.tone-dark .ra-fgcard .fgc-title { color: #F4F6FB; }
+.tone-dark .ra-fgcard .fgc-desc { color: #C3CDE0; }
+.tone-dark .ra-fgcard .fgc-eyebrow { color: #5FC8BF; }
+.tone-dark .ra-fgcard .fgc-link { color: #F0A276; }

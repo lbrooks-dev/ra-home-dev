@@ -129,10 +129,10 @@ function renderOne(s) {
 
   if (s.type === "hero") {
     const logoBg = s.heroLogo
-      ? `<div class="ra-herologo" aria-hidden="true"><img src="/brand/ra-logo.svg" alt="" /></div>`
+      ? `<div class="ra-herologo" aria-hidden="true"><img src="/brand/ra-symbol.svg" alt="" /></div>`
       : "";
     return (
-      `<section class="relative overflow-hidden border-b border-navy-100 bg-grid">` +
+      `<section class="relative overflow-hidden border-b border-navy-100">` +
       logoBg +
       `<div class="relative z-10 mx-auto max-w-content px-6 py-20 md:py-28">` +
       eyebrowP(s) +
@@ -172,19 +172,35 @@ function renderOne(s) {
   }
 
   if (s.type === "featuregrid") {
+    const V = ["topborder", "titlebg", "icon", "darktop", "line", "alt"];
+    const variant = V.includes(s.fgVariant) ? s.fgVariant : "topborder";
+    const TRI = ["#C44620", "#1F3864", "#007B80"];
+    const COLS = variant === "darktop" ? ["#1F3864", "#1F3864", "#1F3864"] : variant === "alt" ? ["#C44620", "#007B80", "#C44620"] : TRI;
+    const cards = items
+      .map((it, i) => {
+        const m = FEATURE_CARD_META[i] || {};
+        const color = COLS[i % COLS.length];
+        const title = it.label || "";
+        const mono = (title.trim().charAt(0) || "\u2022").toUpperCase();
+        const ebH = m.eyebrow ? `<p class="fgc-eyebrow">${esc(m.eyebrow)}</p>` : "";
+        const tiH = `<h3 class="fgc-title">${esc(title)}</h3>`;
+        const deH = `<p class="fgc-desc">${esc(it.text || "")}</p>`;
+        const liH = m.href ? `<a class="fgc-link" href="${esc(m.href)}">${esc(m.cta || "Learn more")} &rarr;</a>` : "";
+        let inner;
+        if (variant === "titlebg") inner = `<div class="fgc-band">${esc(title)}</div><div class="fgc-body">${deH}${liH}</div>`;
+        else if (variant === "icon") inner = `<div class="fgc-icon">${esc(mono)}</div>${tiH}${deH}${liH}`;
+        else if (variant === "line") inner = `<div class="fgc-line"></div>${ebH}${tiH}${deH}${liH}`;
+        else inner = `${ebH}${tiH}${deH}${liH}`;
+        return `<article class="ra-fgcard" style="--bt:${color}">${inner}</article>`;
+      })
+      .join("");
     return (
       `<section class="mx-auto max-w-content px-6 py-section">` +
       eyebrowP(s) +
       (s.heading ? `<h2 class="mt-2 text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
       paras.map((p) => `<p class="mt-3 max-w-prose text-ink">${esc(p)}</p>`).join("") +
-      `<div class="mt-10 grid gap-6 md:grid-cols-3">` +
-      items
-        .map((it, i) => {
-          const m = FEATURE_CARD_META[i] || { accent: ["orange", "teal", "navy"][i % 3] };
-          return card({ title: it.label, eyebrow: m.eyebrow, accent: m.accent, href: m.href, cta: m.cta, body: it.text });
-        })
-        .join("") +
-      `</div></section>`
+      `<div class="ra-fggrid ra-fg-${variant}">${cards}</div>` +
+      `</section>`
     );
   }
 
