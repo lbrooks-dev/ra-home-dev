@@ -16,7 +16,7 @@
 
 <!-- type: hero -->
 
-<!-- tone: dark -->
+<!-- tone: neutral -->
 
 _The firm behind Revenue Architecture®_
 
@@ -32,6 +32,8 @@ Revenue Architects is the practitioner team that created RAOS — the Revenue Ar
 
 <!-- type: authority -->
 
+<!-- tone: dark -->
+
 _The authority_
 
 #### We hold the mark — and the canon underneath it.
@@ -45,8 +47,6 @@ Many firms borrow the words. Revenue Architecture® is ours, and so is the struc
 <!-- id: v1qxhd5 -->
 
 <!-- type: featuregrid -->
-
-<!-- tone: neutral -->
 
 _The services_
 
@@ -64,7 +64,7 @@ The same team that wrote the method delivers all three. Teams and practitioners 
 
 <!-- type: pageintro -->
 
-<!-- tone: light -->
+<!-- tone: dark -->
 
 _The authors_
 
@@ -81,8 +81,6 @@ We take a small number of engagements at a time, and that is the offer, not a li
 <!-- id: jed5g6c -->
 
 <!-- type: clients -->
-
-<!-- tone: neutral -->
 
 _Selected clients_
 
@@ -103,8 +101,6 @@ Firms in financial services and high-consideration B2B have trusted the team beh
 <!-- id: rbb3ryo -->
 
 <!-- type: ctabanner -->
-
-<!-- tone: neutral -->
 
 _Two ways forward_
 
