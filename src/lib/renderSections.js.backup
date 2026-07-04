@@ -296,26 +296,34 @@ function renderOne(s) {
     const rest = hasHeading ? paras : paras.slice(1);
     const blurb = rest[0] || "";
     const legal = rest.slice(1);
+    const tone = ["light", "neutral", "dark"].includes(s.tone) ? s.tone : "light";
+    const dark = tone === "dark";
+    const bandBg = dark ? "#1F3864" : tone === "neutral" ? "rgb(31 56 100 / 0.05)" : "#FFFFFF";
+    const lineC = dark ? "rgba(255,255,255,.14)" : "#DCE3EF";
+    const brandC = dark ? "#FFFFFF" : "#1F3864";
+    const blurbC = dark ? "rgba(255,255,255,.82)" : "#3A3A4A";
+    const legalC = dark ? "rgba(255,255,255,.6)" : "#8CA0BE";
     const nav = links
       .map((l) => {
         const ext = isExt(l.href);
         const cls = ext
           ? "text-teal transition-colors hover:text-teal-600"
           : "text-ink transition-colors hover:text-orange";
-        return `<a href="${esc(l.href)}" class="${cls}">${esc(l.label)}</a>`;
+        const st = dark ? ` style="color:${ext ? "#9CC6C4" : "#D7DCE6"}"` : "";
+        return `<a href="${esc(l.href)}" class="${cls}"${st}>${esc(l.label)}</a>`;
       })
       .join("");
     return (
-      `<footer class="mt-section border-t border-navy-100 bg-surface">` +
+      `<footer class="mt-section" style="background:${bandBg};border-top:1px solid ${lineC}">` +
       `<div class="mx-auto flex max-w-content flex-col gap-6 px-6 py-12 md:flex-row md:items-start md:justify-between">` +
       `<div class="max-w-prose">` +
-      (brand ? `<p class="text-lg font-extrabold text-navy">${esc(brand)}</p>` : "") +
-      (blurb ? `<p class="mt-2 text-sm text-ink">${esc(blurb)}</p>` : "") +
+      (brand ? `<p class="text-lg font-extrabold" style="color:${brandC}">${esc(brand)}</p>` : "") +
+      (blurb ? `<p class="mt-2 text-sm" style="color:${blurbC}">${esc(blurb)}</p>` : "") +
       `</div>` +
       (nav ? `<nav aria-label="Footer" class="flex flex-col gap-2 text-sm">${nav}</nav>` : "") +
       `</div>` +
       (legal.length
-        ? `<div class="border-t border-navy-100"><div class="mx-auto flex max-w-content flex-col gap-1 px-6 py-6 text-xs text-navy-400 md:flex-row md:justify-between">` +
+        ? `<div style="border-top:1px solid ${lineC}"><div class="mx-auto flex max-w-content flex-col gap-1 px-6 py-6 text-xs md:flex-row md:justify-between" style="color:${legalC}">` +
           legal.map((p) => `<p>${esc(p)}</p>`).join("") +
           `</div></div>`
         : "") +

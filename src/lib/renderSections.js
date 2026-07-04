@@ -128,9 +128,13 @@ function renderOne(s) {
   const paras = s.paras || [], items = s.items || [], links = s.links || [];
 
   if (s.type === "hero") {
+    const logoBg = s.heroLogo
+      ? `<div class="ra-herologo" aria-hidden="true"><img src="/brand/ra-logo.svg" alt="" /></div>`
+      : "";
     return (
       `<section class="relative overflow-hidden border-b border-navy-100 bg-grid">` +
-      `<div class="mx-auto max-w-content px-6 py-20 md:py-28">` +
+      logoBg +
+      `<div class="relative z-10 mx-auto max-w-content px-6 py-20 md:py-28">` +
       eyebrowP(s) +
       `<h1 class="mt-4 max-w-4xl text-4xl leading-[1.05] md:text-6xl">${heroHeading(s.heading)}</h1>` +
       paras.map((p) => `<p class="mt-6 max-w-prose text-lg text-ink">${esc(p)}</p>`).join("") +
@@ -185,8 +189,7 @@ function renderOne(s) {
   }
 
   if (s.type === "pageintro") {
-    return (
-      `<section><div class="mx-auto max-w-content px-6 py-section">` +
+    const body =
       eyebrowP(s) +
       (s.heading ? `<h2 class="mt-2 text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
       `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${esc(p)}</p>`).join("")}</div>` +
@@ -195,9 +198,26 @@ function renderOne(s) {
           (l) =>
             `<a href="${esc(l.href)}" class="mt-6 inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">${esc(l.label)} &rarr;</a>`
         )
-        .join("") +
-      `</div></section>`
-    );
+        .join("");
+    const imgs = s.images || [];
+    if (s.layout === "split" && imgs.length) {
+      return (
+        `<section><div class="mx-auto grid max-w-content gap-10 px-6 py-section md:grid-cols-2 md:items-center">` +
+        `<div>${body}</div>` +
+        `<div class="grid grid-cols-2 gap-5">` +
+        imgs
+          .map(
+            (im) =>
+              `<figure class="ra-authorcard"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy" />` +
+              (im.alt ? `<figcaption>${esc(im.alt)}</figcaption>` : "") +
+              `</figure>`
+          )
+          .join("") +
+        `</div>` +
+        `</div></section>`
+      );
+    }
+    return `<section><div class="mx-auto max-w-content px-6 py-section">${body}</div></section>`;
   }
 
   if (s.type === "ctabanner") {
@@ -267,16 +287,25 @@ function renderOne(s) {
   }
 
   if (s.type === "clients") {
+    const boxed = s.clientStyle === "boxed";
+    const grid = boxed
+      ? `<div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-7">` +
+        CLIENT_LOGOS.map(
+          (logo, i) =>
+            `<div class="ra-logobox${i === 0 ? " ra-logobox-fill" : ""}"><img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" /></div>`
+        ).join("") +
+        `</div>`
+      : `<div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">` +
+        CLIENT_LOGOS.map(
+          (logo) =>
+            `<img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" class="h-8 w-auto justify-self-center object-contain grayscale opacity-60 transition duration-200 hover:opacity-100 hover:grayscale-0" />`
+        ).join("") +
+        `</div>`;
     return (
       `<section class="mx-auto max-w-content px-6 py-section">` +
       eyebrowP(s) +
       paras.map((p) => `<p class="mt-4 max-w-prose text-ink">${esc(p)}</p>`).join("") +
-      `<div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">` +
-      CLIENT_LOGOS.map(
-        (logo) =>
-          `<img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" class="h-8 w-auto justify-self-center object-contain grayscale opacity-60 transition duration-200 hover:opacity-100 hover:grayscale-0" />`
-      ).join("") +
-      `</div>` +
+      grid +
       links
         .map(
           (l) =>

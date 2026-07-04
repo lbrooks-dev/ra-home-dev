@@ -58,6 +58,9 @@ export function parseContent(md) {
     const cco = ctaKey(line, 'ctacolor'); if (cco) { cur.ctaColor = cco; continue; }
     const cb1 = ctaKey(line, 'ctab1'); if (cb1) { const p = cb1.split('/'); cur.ctaB1Type = p[0]; cur.ctaB1Color = p[1] || 'default'; continue; }
     const cb2 = ctaKey(line, 'ctab2'); if (cb2) { const p = cb2.split('/'); cur.ctaB2Type = p[0]; cur.ctaB2Color = p[1] || 'default'; continue; }
+    const lo = ctaKey(line, 'layout'); if (lo) { cur.layout = lo; continue; }
+    const csx = ctaKey(line, 'clientstyle'); if (csx) { cur.clientStyle = csx; continue; }
+    if (/^\s*<!--\s*herologo\s*-->\s*$/i.test(line)) { cur.heroLogo = true; continue; }
     if (isComment(line)) continue;
     cur.body.push(line);
   }
@@ -68,6 +71,7 @@ export function parseContent(md) {
     let heading = '';
     const paras = [];
     const items = [];
+    const images = [];
     let links = [];
     for (const line of s.body) {
       const t = line.trim();
@@ -75,6 +79,7 @@ export function parseContent(md) {
       let m;
       if ((m = t.match(/^_(.+)_$/))) { eyebrow = m[1].trim(); continue; }
       if ((m = t.match(/^#{4,6}\s+(.+)$/))) { heading = m[1].trim(); continue; }
+      if ((m = t.match(/^!\[([^\]]*)\]\(([^)]+)\)\s*$/))) { images.push({ alt: m[1].trim(), src: m[2].trim() }); continue; }
       if ((m = t.match(/^[-*]\s+(.+)$/))) {
         const raw = m[1];
         const sep = raw.match(/\s[\u2014\u2013-]\s/); // a dash with spaces around it — not hyphenated words
@@ -86,7 +91,7 @@ export function parseContent(md) {
       if (found.length) { links = links.concat(found); continue; }
       paras.push(t);
     }
-    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
+    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', layout: s.layout || 'default', heroLogo: !!s.heroLogo, clientStyle: (['bare','boxed'].includes(s.clientStyle) ? s.clientStyle : 'bare'), title: s.title, eyebrow, heading: heading || s.title, paras, items, images, links };
   });
 
   return { siteTitle, pageTitle, sections };
