@@ -12,10 +12,12 @@ let md = '';
 try { md = fs.readFileSync(path.resolve('./content.md'), 'utf8'); }
 catch (e) { md = '# Revenue Architects\n## Home\n### Notice\nNo content.md found at the repo root yet.'; }
 const { sections } = parseContent(md);
+const hasFooter = sections.some((s) => s.type === 'footer');
 ---
 <Base
   title="Revenue Architects"
   description="Revenue Architects is the practitioner team that created RAOS — the Revenue Architecture Operating System. We train the teams who run it, certify practitioners, and deliver engagements where the architecture has to hold."
+  showFooter={!hasFooter}
 >
   <MyFolioRender sections={sections} />
 </Base>

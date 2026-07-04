@@ -287,6 +287,50 @@ function renderOne(s) {
     );
   }
 
+  // Footer: two-column brand/nav row + legal row. Mirrors Footer.astro so it
+  // uses the site's compiled classes. Contract: heading = brand name, first
+  // paragraph = blurb, remaining paragraphs = legal lines, links = footer nav.
+  if (s.type === "footer") {
+    const hasHeading = !!s.heading;
+    const brand = s.heading || paras[0] || "";
+    const rest = hasHeading ? paras : paras.slice(1);
+    const blurb = rest[0] || "";
+    const legal = rest.slice(1);
+    const tone = ["light", "neutral", "dark"].includes(s.tone) ? s.tone : "light";
+    const dark = tone === "dark";
+    const bandBg = dark ? "#1F3864" : tone === "neutral" ? "rgb(31 56 100 / 0.05)" : "#FFFFFF";
+    const lineC = dark ? "rgba(255,255,255,.14)" : "#DCE3EF";
+    const brandC = dark ? "#FFFFFF" : "#1F3864";
+    const blurbC = dark ? "rgba(255,255,255,.82)" : "#3A3A4A";
+    const legalC = dark ? "rgba(255,255,255,.6)" : "#8CA0BE";
+    const nav = links
+      .map((l) => {
+        const ext = isExt(l.href);
+        const cls = ext
+          ? "text-teal transition-colors hover:text-teal-600"
+          : "text-ink transition-colors hover:text-orange";
+        const st = dark ? ` style="color:${ext ? "#9CC6C4" : "#D7DCE6"}"` : "";
+        return `<a href="${esc(l.href)}" class="${cls}"${st}>${esc(l.label)}</a>`;
+      })
+      .join("");
+    return (
+      `<footer class="mt-section" style="background:${bandBg};border-top:1px solid ${lineC}">` +
+      `<div class="mx-auto flex max-w-content flex-col gap-6 px-6 py-12 md:flex-row md:items-start md:justify-between">` +
+      `<div class="max-w-prose">` +
+      (brand ? `<p class="text-lg font-extrabold" style="color:${brandC}">${esc(brand)}</p>` : "") +
+      (blurb ? `<p class="mt-2 text-sm" style="color:${blurbC}">${esc(blurb)}</p>` : "") +
+      `</div>` +
+      (nav ? `<nav aria-label="Footer" class="flex flex-col gap-2 text-sm">${nav}</nav>` : "") +
+      `</div>` +
+      (legal.length
+        ? `<div style="border-top:1px solid ${lineC}"><div class="mx-auto flex max-w-content flex-col gap-1 px-6 py-6 text-xs md:flex-row md:justify-between" style="color:${legalC}">` +
+          legal.map((p) => `<p>${esc(p)}</p>`).join("") +
+          `</div></div>`
+        : "") +
+      `</footer>`
+    );
+  }
+
   // Generic fallback.
   return (
     `<section class="mx-auto max-w-content px-6 py-section">` +
@@ -299,7 +343,7 @@ function renderOne(s) {
 // Wrap each section in its tone band (mirrors the .astro wrapper).
 export function renderSection(s) {
   const id = s && s.id ? ` data-section-id="${esc(s.id)}"` : "";
-  if (s && s.type === "ctabanner") return `<div${id}>${renderOne(s)}</div>`;
+  if (s && (s.type === "ctabanner" || s.type === "footer")) return `<div${id}>${renderOne(s)}</div>`;
   const cls = [toneClass(s), alignClass(s), bgClass(s)].filter(Boolean).join(" ");
   return `<div class="${cls}"${id}>${renderOne(s)}</div>`;
 }

@@ -13,6 +13,25 @@ const escMap = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#
 const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => escMap[c]);
 const isExt = (href) => /^https?:/i.test(href || "");
 
+// CTA Banner palettes (ported verbatim from the styling demo).
+const CTA_COLORS = {
+  orange: { fill: "#C44620", accent: "#C44620", tint: "#FBEFE9" },
+  teal: { fill: "#007B80", accent: "#007B80", tint: "#E3F0EF" },
+  navy: { fill: "#1F3864", accent: "#1F3864", tint: "#EAEEF5" },
+  lightteal: { fill: "#E3F0EF", accent: "#007B80", tint: "#E3F0EF" },
+};
+const BTN_COLORS = { white: "#FFFFFF", orange: "#C44620", teal: "#007B80", navy: "#1F3864" };
+const STYLE_BG = { light: "#FFFFFF", neutral: "#EEF1F6", dark: "#17294F" };
+// One CTA button: type is solid | outline | link; bcKey picks the color.
+function ctaButton(href, label, type, bcKey) {
+  const bc = BTN_COLORS[bcKey] || BTN_COLORS.navy;
+  const h = esc(href), t = esc(label);
+  if (type === "link") return `<a class="cta-btn cta-link" href="${h}" style="background:transparent;border:0;color:${bc}">${t} \u2192</a>`;
+  if (type === "outline") return `<a class="cta-btn" href="${h}" style="background:transparent;color:${bc};border:1.5px solid ${bc}">${t}</a>`;
+  const txt = bcKey === "white" ? "#1F3864" : "#FFFFFF";
+  return `<a class="cta-btn" href="${h}" style="background:${bc};color:${txt};border:1.5px solid ${bc}">${t}</a>`;
+}
+
 // Eyebrow class per section (same rule as the site).
 const ebClass = (s) =>
   s.eyebrowStyle === "letterspacing" ? "eyebrow-track" : s.eyebrowStyle === "default" ? "eyebrow-plain" : "eyebrow";
@@ -182,30 +201,50 @@ function renderOne(s) {
   }
 
   if (s.type === "ctabanner") {
-    const body = paras.join(" ");
-    const buttons = links.map((l, i) => ({ href: l.href, label: l.label, variant: i === links.length - 1 ? "orange" : "teal", external: isExt(l.href) }));
-    const vClass = {
-      orange: "bg-orange text-surface hover:bg-orange-600",
-      teal: "bg-teal text-surface hover:bg-teal-600",
-      outline: "border border-navy text-navy hover:bg-navy hover:text-surface",
-    };
-    return (
-      `<section class="mt-section"><div class="mx-auto max-w-content px-6">` +
-      `<div class="rounded-card bg-navy px-8 py-12 text-surface md:px-12">` +
-      (s.eyebrow ? `<p class="text-sm font-semibold uppercase tracking-wide text-orange-200">${esc(s.eyebrow)}</p>` : "") +
-      `<h2 class="mt-2 max-w-prose text-2xl text-surface md:text-3xl">${esc(s.heading)}</h2>` +
-      (body ? `<p class="mt-4 max-w-prose text-navy-100">${esc(body)}</p>` : "") +
-      `<div class="mt-8 flex flex-col gap-4 sm:flex-row">` +
-      buttons
-        .map(
-          (b) =>
-            `<a href="${esc(b.href)}" class="inline-flex items-center justify-center rounded-card px-6 py-3 text-sm font-semibold transition-colors ${
-              vClass[b.variant] || vClass.orange
-            }"${b.external ? ' rel="noopener" target="_blank"' : ""}>${esc(b.label)}</a>`
-        )
-        .join("") +
-      `</div></div></div></section>`
-    );
+    const name = s.ctaName === "full" ? "full" : "boxed";
+    const style = ["light", "neutral", "dark"].includes(s.tone) ? s.tone : "light";
+    const align = ["left", "center", "right"].includes(s.align) ? s.align : "left";
+    const type = ["solid", "outline", "bar"].includes(s.ctaType) ? s.ctaType : "solid";
+    const color = ["orange", "teal", "navy", "lightteal", "none"].includes(s.ctaColor) ? s.ctaColor : "none";
+    const desc = paras.join(" ");
+    const btnOpts = [{ type: s.ctaB1Type, color: s.ctaB1Color }, { type: s.ctaB2Type, color: s.ctaB2Color }];
+    const actions =
+      `<div class="cta-actions">` +
+      links.map((l, i) => {
+        const o = btnOpts[i] || {};
+        const btype = ["solid", "outline", "link"].includes(o.type) ? o.type : "solid";
+        const bckey = ["white", "orange", "teal", "navy"].includes(o.color) ? o.color : i === 0 ? "teal" : "orange";
+        return ctaButton(l.href, l.label, btype, bckey);
+      }).join("") +
+      `</div>`;
+    if (name === "full") {
+      const useColor = color !== "none";
+      const bg = useColor ? CTA_COLORS[color].fill : STYLE_BG[style];
+      const darkBg = useColor ? color !== "lightteal" : style === "dark";
+      const head = darkBg ? "#FFFFFF" : "#1F3864", descc = darkBg ? "rgba(255,255,255,.86)" : "#3A3A4A";
+      const eyeF = darkBg ? "rgba(255,255,255,.85)" : "#007B80";
+      const eyebrowF = s.eyebrow ? `<p class="cta-eyebrow" style="color:${eyeF}">${esc(s.eyebrow)}</p>` : "";
+      return (
+        `<section class="cta-section cta-name-full cta-align-${align}" style="background:${bg}">` +
+        `<div class="cta-fullinner">${eyebrowF}<h2 class="cta-h2" style="color:${head}">${esc(s.heading)}</h2>` +
+        (desc ? `<p class="cta-desc" style="color:${descc}">${esc(desc)}</p>` : "") +
+        actions +
+        `</div></section>`
+      );
+    }
+    const boxColor = color === "none" ? "navy" : color, c = CTA_COLORS[boxColor];
+    const outline = type === "outline", darkBox = !outline && boxColor !== "lightteal";
+    const boxBg = outline ? c.tint : c.fill, border = outline ? `2px dashed ${c.accent}` : "1px solid transparent";
+    const txt = darkBox ? "#FFFFFF" : "#3A3A4A", head2 = darkBox ? "#FFFFFF" : "#1F3864", eye = darkBox ? "rgba(255,255,255,.82)" : c.accent;
+    const eyebrow = s.eyebrow ? `<p class="cta-eyebrow" style="color:${eye}">${esc(s.eyebrow)}</p>` : "";
+    const boxStyle = `background:${boxBg};border:${border};color:${txt}`;
+    const inner =
+      type === "bar"
+        ? `<div class="cta-inner"><div class="cta-box" style="${boxStyle}"><div class="cta-textwrap">${eyebrow}<h2 class="cta-h2" style="color:${head2}">${esc(s.heading)}</h2></div>${actions}</div></div>`
+        : `<div class="cta-inner"><div class="cta-box" style="${boxStyle}">${eyebrow}<h2 class="cta-h2" style="color:${head2}">${esc(s.heading)}</h2>` +
+          (desc ? `<p class="cta-desc" style="color:${txt}">${esc(desc)}</p>` : "") +
+          `${actions}</div></div>`;
+    return `<section class="cta-section cta-name-boxed st-style-${style} cta-type-${type} cta-color-${boxColor} cta-align-${align}">${inner}</section>`;
   }
 
   if (s.type === "authority") {
@@ -248,6 +287,42 @@ function renderOne(s) {
     );
   }
 
+  // Footer: two-column brand/nav row + legal row. Mirrors Footer.astro so it
+  // uses the site's compiled classes. Contract: heading = brand name, first
+  // paragraph = blurb, remaining paragraphs = legal lines, links = footer nav.
+  if (s.type === "footer") {
+    const hasHeading = !!s.heading;
+    const brand = s.heading || paras[0] || "";
+    const rest = hasHeading ? paras : paras.slice(1);
+    const blurb = rest[0] || "";
+    const legal = rest.slice(1);
+    const nav = links
+      .map((l) => {
+        const ext = isExt(l.href);
+        const cls = ext
+          ? "text-teal transition-colors hover:text-teal-600"
+          : "text-ink transition-colors hover:text-orange";
+        return `<a href="${esc(l.href)}" class="${cls}">${esc(l.label)}</a>`;
+      })
+      .join("");
+    return (
+      `<footer class="mt-section border-t border-navy-100 bg-surface">` +
+      `<div class="mx-auto flex max-w-content flex-col gap-6 px-6 py-12 md:flex-row md:items-start md:justify-between">` +
+      `<div class="max-w-prose">` +
+      (brand ? `<p class="text-lg font-extrabold text-navy">${esc(brand)}</p>` : "") +
+      (blurb ? `<p class="mt-2 text-sm text-ink">${esc(blurb)}</p>` : "") +
+      `</div>` +
+      (nav ? `<nav aria-label="Footer" class="flex flex-col gap-2 text-sm">${nav}</nav>` : "") +
+      `</div>` +
+      (legal.length
+        ? `<div class="border-t border-navy-100"><div class="mx-auto flex max-w-content flex-col gap-1 px-6 py-6 text-xs text-navy-400 md:flex-row md:justify-between">` +
+          legal.map((p) => `<p>${esc(p)}</p>`).join("") +
+          `</div></div>`
+        : "") +
+      `</footer>`
+    );
+  }
+
   // Generic fallback.
   return (
     `<section class="mx-auto max-w-content px-6 py-section">` +
@@ -260,6 +335,7 @@ function renderOne(s) {
 // Wrap each section in its tone band (mirrors the .astro wrapper).
 export function renderSection(s) {
   const id = s && s.id ? ` data-section-id="${esc(s.id)}"` : "";
+  if (s && (s.type === "ctabanner" || s.type === "footer")) return `<div${id}>${renderOne(s)}</div>`;
   const cls = [toneClass(s), alignClass(s), bgClass(s)].filter(Boolean).join(" ");
   return `<div class="${cls}"${id}>${renderOne(s)}</div>`;
 }
