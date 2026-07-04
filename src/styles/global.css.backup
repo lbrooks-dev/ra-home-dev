@@ -144,13 +144,13 @@
 @keyframes ra-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .ra-herologo img { animation: none; } }
 /* ---- Boxed client logos (option: clientstyle=boxed; first logo filled) ---- */
-.ra-logobox { display: flex; align-items: center; justify-content: center; background: #FFFFFF; border-radius: 15px; padding: 1.25rem 1rem; border: 5px solid transparent; box-shadow: 0 1px 3px rgb(31 56 100 / 0.06); filter: grayscale(1); opacity: 0.72; transition: filter 0.2s, opacity 0.2s, box-shadow 0.2s, border-color 0.2s; }
-.ra-logobox img { display: block; max-height: 34px; width: auto; max-width: 100%; object-fit: contain; }
+.ra-logobox { display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; background: #FFFFFF; border-radius: 15px; padding: 1.25rem; border: 5px solid transparent; box-shadow: 0 1px 3px rgb(31 56 100 / 0.06); filter: grayscale(1); opacity: 0.72; transition: filter 0.2s, opacity 0.2s, box-shadow 0.2s, border-color 0.2s; }
+.ra-logobox img { display: block; height: 48px; width: auto; max-width: 100%; object-fit: contain; }
 .ra-logobox:hover { filter: grayscale(0); opacity: 1; border-color: rgb(31 56 100 / 0.12); box-shadow: 0 12px 28px rgb(31 56 100 / 0.16); }
-.ra-logobox-fill { background: #4E93CE; filter: none; opacity: 1; }
-.ra-logobox-fill img { filter: brightness(0) invert(1); }
-.ra-logobox-fill:hover { border-color: rgb(255 255 255 / 0.45); }
 /* ---- Author cards (pageintro split layout, images right) ---- */
 .ra-authorcard { margin: 0; }
 .ra-authorcard img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 24px rgb(31 56 100 / 0.12); }
 .ra-authorcard figcaption { margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; color: #1F3864; }
+/* Collapse the gap between a CTA section and a content footer that follows it */
+div:has(> .cta-section):has(+ div > footer) .cta-inner,
+div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-bottom: 1.5rem; }
