@@ -90,17 +90,13 @@ The same team that wrote the method delivers all three. Teams and practitioners 
 
 _The authors_
 
-#### You are hiring the source.
+#### You are hiring the source
 
 Sherwin and John wrote Revenue Architecture. They lead every engagement the firm takes, backed by a supporting team and a network of Certified Architects who carry the same standard into the field.
 
 We take a small number of engagements at a time, and that is the offer, not a limitation. The people who built the architecture are the people who run it with you — not a junior bench, not a licensee, not a loose reading of the words.
 
 [Meet the firm](/about)
-
-`![John](/authors/john.png)`
-
-`![Sherwin](/authors/sherwin.png)`
 
 ### Selected clients
 
