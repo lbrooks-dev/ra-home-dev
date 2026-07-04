@@ -8,7 +8,7 @@ import CtaBlock from '../components/CtaBlock.astro';
   description="Revenue Architects offers three things: Certification, Training, and Engagement. Design and operate are unified — RAOS is human-orchestrated and AI-operated."
 >
   <section class="mx-auto max-w-content px-6 py-20 md:py-28">
-    <p class="eyebrow">Services</p>
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">Services</p>
     <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
       Three ways to put the method to work.
     </h1>
@@ -47,7 +47,7 @@ import CtaBlock from '../components/CtaBlock.astro';
   <!-- Training -->
   <section id="training" class="scroll-mt-24 border-t-4 border-teal">
     <div class="mx-auto max-w-content px-6 py-section">
-      <p class="eyebrow">Training</p>
+      <p class="text-sm font-semibold uppercase tracking-wide text-teal">Training</p>
       <h2 class="mt-2 text-2xl md:text-3xl">Train the trainer. Enable the team.</h2>
       <div class="mt-6 max-w-prose space-y-4 text-ink">
         <p>

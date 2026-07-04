@@ -25,15 +25,30 @@ export function parseContent(md) {
     const m = l.match(/^\s*<!--\s*eyebrow:\s*(.+?)\s*-->\s*$/i);
     return m ? m[1].trim().toLowerCase() : null;
   };
+  const toneOf = (l) => {
+    const m = l.match(/^\s*<!--\s*tone:\s*(.+?)\s*-->\s*$/i);
+    return m ? m[1].trim().toLowerCase() : null;
+  };
+  const alignOf = (l) => {
+    const m = l.match(/^\s*<!--\s*align:\s*(.+?)\s*-->\s*$/i);
+    return m ? m[1].trim().toLowerCase() : null;
+  };
+  const bgOf = (l) => {
+    const m = l.match(/^\s*<!--\s*bg:\s*(.+?)\s*-->\s*$/i);
+    return m ? m[1].trim().toLowerCase() : null;
+  };
   const isComment = (l) => /^\s*<!--.*-->\s*$/.test(l);
 
   for (const line of lines) {
     if (/^#\s+/.test(line)) { if (!cur) siteTitle = line.replace(/^#\s+/, '').trim(); continue; }
     if (/^##\s+/.test(line)) { if (!cur) pageTitle = line.replace(/^##\s+/, '').trim(); continue; }
-    if (/^###\s+/.test(line)) { if (cur) raw.push(cur); cur = { title: line.replace(/^###\s+/, '').trim(), type: '', eyebrowStyle: '', body: [] }; continue; }
+    if (/^###\s+/.test(line)) { if (cur) raw.push(cur); cur = { title: line.replace(/^###\s+/, '').trim(), type: '', eyebrowStyle: '', tone: '', align: '', bg: '', body: [] }; continue; }
     if (!cur) continue;
     const ty = typeOf(line); if (ty) { cur.type = ty; continue; }
     const eb = eyebrowOf(line); if (eb) { cur.eyebrowStyle = eb; continue; }
+    const tn = toneOf(line); if (tn) { cur.tone = tn; continue; }
+    const al = alignOf(line); if (al) { cur.align = al; continue; }
+    const bgv = bgOf(line); if (bgv) { cur.bg = bgv; continue; }
     if (isComment(line)) continue;
     cur.body.push(line);
   }
@@ -62,7 +77,7 @@ export function parseContent(md) {
       if (found.length) { links = links.concat(found); continue; }
       paras.push(t);
     }
-    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
+    return { type: s.type || 'generic', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), title: s.title, eyebrow, heading: heading || s.title, paras, items, links };
   });
 
   return { siteTitle, pageTitle, sections };

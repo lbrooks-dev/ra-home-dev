@@ -8,7 +8,7 @@ import CtaBlock from '../components/CtaBlock.astro';
   description="Revenue Architects created and stewards Revenue Architecture. Built for high-consideration B2B and financial-services firms. Meet the authors."
 >
   <section class="mx-auto max-w-content px-6 py-20 md:py-28">
-    <p class="eyebrow">The Firm</p>
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">The Firm</p>
     <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
       The firm that created Revenue Architecture&reg;.
     </h1>

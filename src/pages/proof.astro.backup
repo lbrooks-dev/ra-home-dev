@@ -28,7 +28,7 @@ const stubs = [
   description="Delivery evidence from Revenue Architects engagements."
 >
   <section class="mx-auto max-w-content px-6 py-20 md:py-28">
-    <p class="eyebrow">Proof</p>
+    <p class="text-sm font-semibold uppercase tracking-wide text-teal">Proof</p>
     <h1 class="mt-4 max-w-prose text-4xl leading-tight md:text-5xl">
       The work, and the people who carry it.
     </h1>
