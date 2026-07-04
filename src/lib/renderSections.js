@@ -291,8 +291,8 @@ function renderOne(s) {
     const grid = boxed
       ? `<div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-7">` +
         CLIENT_LOGOS.map(
-          (logo, i) =>
-            `<div class="ra-logobox${i === 0 ? " ra-logobox-fill" : ""}"><img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" /></div>`
+          (logo) =>
+            `<div class="ra-logobox"><img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" /></div>`
         ).join("") +
         `</div>`
       : `<div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">` +
@@ -343,7 +343,7 @@ function renderOne(s) {
       })
       .join("");
     return (
-      `<footer class="mt-section" style="background:${bandBg};border-top:1px solid ${lineC}">` +
+      `<footer style="background:${bandBg};border-top:1px solid ${lineC}">` +
       `<div class="mx-auto flex max-w-content flex-col gap-6 px-6 py-12 md:flex-row md:items-start md:justify-between">` +
       `<div class="max-w-prose">` +
       (brand ? `<p class="text-lg font-extrabold" style="color:${brandC}">${esc(brand)}</p>` : "") +
