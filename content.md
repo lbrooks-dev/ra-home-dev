@@ -66,7 +66,7 @@ Many firms borrow the words. Revenue Architecture® is ours, and so is the struc
 
 <!-- tone: neutral -->
 
-<!-- fgname: darktop -->
+<!-- fgname: titlebg -->
 
 _The services_
 
