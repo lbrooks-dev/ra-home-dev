@@ -84,7 +84,7 @@ The same team that wrote the method delivers all three. Teams and practitioners 
 
 <!-- type: pageintro -->
 
-<!-- tone: dark -->
+<!-- tone: light -->
 
 <!-- layout: split -->
 
