@@ -45,9 +45,9 @@
   }
   /* Default: plain teal label, normal tracking, no rule */
   .eyebrow-plain {
-    @apply inline-block text-xs font-semibold uppercase tracking-wide text-teal-600;
+    @apply inline-block text-xs font-semibold uppercase tracking-wide text-teal;
   }
-  /* Subtle blueprint grid — navy (#1F3A63) at ~4.5% */
+  /* Subtle blueprint grid — navy (#1F3864) at ~4.5% */
   .bg-grid {
     background-image:
       linear-gradient(to right, rgb(31 56 100 / 0.045) 1px, transparent 1px),
@@ -63,25 +63,25 @@
    (>= 4.5:1). Descendant selectors (>= 0,2,0) win over the utilities. */
 .tone-light   { background: #FFFFFF; }
 .tone-neutral { background: rgb(31 56 100 / 0.05); }
-.tone-dark    { background: #1F3A63; color: #D7DCE6; }
+.tone-dark    { background: #182951; color: #D7DCE6; }
 .tone-dark p, .tone-dark li { color: #D7DCE6; }
 .tone-dark h1, .tone-dark h2, .tone-dark h3 { color: #FFFFFF; }
-.tone-dark .eyebrow, .tone-dark .eyebrow-track, .tone-dark .eyebrow-plain { color: #E9C3A8; }
-.tone-dark .eyebrow::before { background: #EA9176; }
+.tone-dark .eyebrow, .tone-dark .eyebrow-track, .tone-dark .eyebrow-plain { color: #5bb3b8; }
+.tone-dark .eyebrow::before { background: #c23a00; }
 /* Arrow links (the text-orange utility, not solid buttons) per tone */
-.tone-light .text-orange, .tone-neutral .text-orange { color: #C23A00; }
-.tone-dark .text-orange { color: #EE9E76; }
+.tone-light .text-orange, .tone-neutral .text-orange { color: #c23a00; }
+.tone-dark .text-orange { color: #c23a00; }
 .tone-dark .hover\:text-orange-600:hover { color: #F2B291; }
 /* Teal arrow links (e.g. "See the full method") need lightening on dark */
-.tone-dark .text-teal { color: #5BB3B8; }
-.tone-dark .hover\:text-teal-600:hover { color: #8BCCD0; }
+.tone-dark .text-teal { color: #7FC6C8; }
+.tone-dark .hover\:text-teal-600:hover { color: #9CD3D0; }
 /* Authority-diagram footnote sits on the section bg, so it follows the tone */
 .tone-dark .ra-auth-note { fill: #D7DCE6; }
 /* Cards on dark become translucent light panels */
 .tone-dark .rounded-card { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); box-shadow: none; }
 .tone-dark .rounded-card h3 { color: #FFFFFF; }
 .tone-dark .rounded-card .text-ink { color: #D7DCE6; }
-.tone-dark .rounded-card .text-teal { color: #5BB3B8; }
+.tone-dark .rounded-card .text-teal { color: #7FC6C8; }
 /* ---- Text alignment (left default) ---- */
 .align-center { text-align: center; }
 .align-center .max-w-prose, .align-center .max-w-4xl { margin-left: auto; margin-right: auto; }
@@ -106,8 +106,8 @@
 /* ---- CTA Banner variants (boxed / full / bar; colors set inline by renderer) ---- */
 .cta-section { position: relative; }
 .st-style-light { background: #FFFFFF; }
-.st-style-neutral { background: #F3F4F6; }
-.st-style-dark { background: #132C57; }
+.st-style-neutral { background: #EEF1F6; }
+.st-style-dark { background: #17294F; }
 .cta-inner { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
 .cta-box { border-radius: .75rem; padding: 2.5rem 2rem; }
 .cta-eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .5rem; }
@@ -144,7 +144,7 @@
 .cta-name-full.cta-align-right .cta-h2, .cta-name-full.cta-align-right .cta-desc { margin-left: auto; margin-right: 0; }
 .cta-name-full.cta-align-right .cta-actions { justify-content: flex-end; }
 /* ---- Hero rotating logo watermark (option: herologo) ---- */
-.ra-herologo { position: absolute; right: -8%; top: 50%; transform: translateY(-50%); width: min(88vw, 1000px); opacity: 0.10; pointer-events: none; z-index: 0; }
+.ra-herologo { position: absolute; left: 50%; top: 50%; transform: translateY(-50%); width: min(65%, 850px); opacity: 0.10; pointer-events: none; z-index: 0; }
 .ra-herologo img { display: block; width: 100%; height: auto; transform-origin: 50% 50%; animation: ra-spin 120s linear infinite; }
 @keyframes ra-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .ra-herologo img { animation: none; } }
@@ -154,29 +154,29 @@
 .ra-logobox:hover { filter: grayscale(0); opacity: 1; border-color: rgb(31 56 100 / 0.12); box-shadow: 0 12px 28px rgb(31 56 100 / 0.16); }
 /* ---- Author cards (pageintro split layout, images right) ---- */
 .ra-authorcard { margin: 0; }
-.ra-authorcard img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 24px rgb(31 56 100 / 0.12); }
-.ra-authorcard figcaption { margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; color: #1F3A63; }
+.ra-authorcard img { display: block; width: 100%; max-width: 165px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 24px rgb(31 56 100 / 0.12); }
+.ra-authorcard figcaption { margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; color: #1F3864; }
 /* Collapse the gap between a CTA section and a content footer that follows it,
    keeping the inner box vertically centered (equal padding top and bottom) */
 div:has(> .cta-section):has(+ div > footer) .cta-inner,
-div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-top: 2.5rem; padding-bottom: 6rem; }
 /* ---- Feature grid card variants (option: fgname) ---- */
 .ra-fggrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
 @media (max-width: 780px) { .ra-fggrid { grid-template-columns: 1fr; } }
 .ra-fgcard { display: flex; flex-direction: column; align-items: flex-start; text-align: left; border-radius: 0.75rem; background: #FFFFFF; border: 1px solid #DDE1E8; box-shadow: 0 1px 2px rgb(23 41 79 / 0.05); padding: 1.5rem; height: 100%; }
-.ra-fgcard .fgc-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #057176; margin: 0 0 0.25rem; }
-.ra-fgcard .fgc-title { font-size: 1.25rem; font-weight: 700; color: #132C57; margin: 0 0 0.5rem; line-height: 1.2; }
+.ra-fgcard .fgc-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #007B80; margin: 0 0 0.25rem; }
+.ra-fgcard .fgc-title { font-size: 1.25rem; font-weight: 700; color: #17294F; margin: 0 0 0.5rem; line-height: 1.2; }
 .ra-fgcard .fgc-desc { font-size: 0.9rem; line-height: 1.6; color: #3A3A4A; flex: 1; margin: 0; }
-.ra-fgcard .fgc-link { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: #C23A00; text-decoration: none; }
+.ra-fgcard .fgc-link { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: #c23a00; text-decoration: none; }
 .ra-fgcard .fgc-link:hover { text-decoration: underline; }
-.ra-fg-topborder .ra-fgcard, .ra-fg-darktop .ra-fgcard, .ra-fg-alt .ra-fgcard { border-top: 4px solid var(--bt, #C23A00); }
-.ra-fg-icon .ra-fgcard .fgc-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.6rem; background: var(--bt, #C23A00); color: #fff; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
-.ra-fg-line .ra-fgcard .fgc-line { width: 2rem; height: 3px; border-radius: 2px; background: var(--bt, #C23A00); margin-bottom: 1rem; }
+.ra-fg-topborder .ra-fgcard, .ra-fg-darktop .ra-fgcard, .ra-fg-alt .ra-fgcard { border-top: 4px solid var(--bt, #c23a00); }
+.ra-fg-icon .ra-fgcard .fgc-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.6rem; background: var(--bt, #c23a00); color: #fff; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.ra-fg-line .ra-fgcard .fgc-line { width: 2rem; height: 3px; border-radius: 2px; background: var(--bt, #c23a00); margin-bottom: 1rem; }
 .ra-fg-titlebg .ra-fgcard { padding: 0; overflow: hidden; align-items: stretch; }
-.ra-fg-titlebg .ra-fgcard .fgc-band { background: var(--bt, #C23A00); color: #fff; font-weight: 700; font-size: 1.1rem; padding: 0.85rem 1.25rem; }
+.ra-fg-titlebg .ra-fgcard .fgc-band { background: var(--bt, #c23a00); color: #fff; font-weight: 700; font-size: 1.1rem; padding: 0.85rem 1.25rem; }
 .ra-fg-titlebg .ra-fgcard .fgc-body { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; padding: 1.25rem; align-items: flex-start; }
 .tone-dark .ra-fgcard { background: #1C2E52; border-color: rgb(255 255 255 / 0.12); box-shadow: none; }
 .tone-dark .ra-fgcard .fgc-title { color: #F4F6FB; }
 .tone-dark .ra-fgcard .fgc-desc { color: #C3CDE0; }
-.tone-dark .ra-fgcard .fgc-eyebrow { color: #5BB3B8; }
+.tone-dark .ra-fgcard .fgc-eyebrow { color: #5FC8BF; }
 .tone-dark .ra-fgcard .fgc-link { color: #F0A276; }

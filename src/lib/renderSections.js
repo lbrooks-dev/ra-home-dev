@@ -12,17 +12,10 @@
 const escMap = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 const esc = (v) => String(v == null ? "" : v).replace(/[&<>"']/g, (c) => escMap[c]);
 const isExt = (href) => /^https?:/i.test(href || "");
-// Inline markdown inside a paragraph: bold, italic, code, and inline links.
-// Standalone link lines are handled as buttons/links by parseContent, not here.
-const inl = (v) => esc(v)
-  .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-  .replace(/\*([^*]+)\*/g, "<em>$1</em>")
-  .replace(/`([^`]+)`/g, "<code>$1</code>")
-  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, l, h) => `<a href="${h}"${isExt(h) ? ' rel="noopener" target="_blank"' : ""}>${l}</a>`);
 
 // CTA Banner palettes (ported verbatim from the styling demo).
 const CTA_COLORS = {
-  orange: { fill: "#c94a26", accent: "#c94a26", tint: "#FBEFE9" },
+  orange: { fill: "#c23a00", accent: "#c23a00", tint: "#FBEFE9" },
   teal: { fill: "#007B80", accent: "#007B80", tint: "#E3F0EF" },
   navy: { fill: "#1F3864", accent: "#1F3864", tint: "#EAEEF5" },
   lightteal: { fill: "#E3F0EF", accent: "#007B80", tint: "#E3F0EF" },
@@ -164,15 +157,15 @@ function renderOne(s) {
       `<div class="relative z-10 mx-auto max-w-content px-6 py-20 md:py-28">` +
       eyebrowP(s) +
       `<h1 class="mt-4 max-w-4xl text-4xl leading-[1.05] md:text-6xl">${heroHeading(s.heading)}</h1>` +
-      paras.map((p) => `<p class="mt-6 max-w-prose text-lg text-ink">${inl(p)}</p>`).join("") +
+      paras.map((p) => `<p class="mt-6 max-w-prose text-lg text-ink">${esc(p)}</p>`).join("") +
       (links.length
         ? `<div class="mt-8 flex flex-col gap-4 sm:flex-row">` +
           links
             .map(
               (l, i) =>
                 `<a href="${esc(l.href)}" class="inline-flex items-center justify-center rounded-card px-6 py-3 text-sm font-semibold transition-colors ${
-                  i === 0 ? "bg-orange text-surface hover:bg-orange-600" : "border border-navy text-navy hover:bg-navy hover:text-surface"
-                }">${esc(l.label)}</a>`
+                  i === 0 ? "bg-orange text-surface hover:bg-orange-600" : ""
+                }"${i === 0 ? "" : " style=\"background:transparent;color:#FFFFFF;border:1px solid #5bb3b8\""}>${esc(l.label)}</a>`
             )
             .join("") +
           `</div>`
@@ -185,7 +178,7 @@ function renderOne(s) {
     return (
       `<section class="mx-auto max-w-content px-6 py-section">` +
       (s.heading ? `<h2 class="text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
-      paras.map((p) => `<p class="mt-3 max-w-prose text-ink">${inl(p)}</p>`).join("") +
+      paras.map((p) => `<p class="mt-3 max-w-prose text-ink">${esc(p)}</p>`).join("") +
       `<div class="mt-10 grid gap-6 sm:grid-cols-3">` +
       items
         .map(
@@ -201,8 +194,8 @@ function renderOne(s) {
   if (s.type === "featuregrid") {
     const V = ["topborder", "titlebg", "icon", "darktop", "line", "alt"];
     const variant = V.includes(s.fgVariant) ? s.fgVariant : "topborder";
-    const TRI = ["#c94a26", "#1F3864", "#007B80"];
-    const COLS = variant === "darktop" ? ["#1F3864", "#1F3864", "#1F3864"] : variant === "alt" ? ["#c94a26", "#007B80", "#c94a26"] : TRI;
+    const TRI = ["#c23a00", "#1F3864", "#007B80"];
+    const COLS = variant === "darktop" ? ["#1F3864", "#1F3864", "#1F3864"] : variant === "alt" ? ["#c23a00", "#007B80", "#c23a00"] : TRI;
     const cards = items
       .map((it, i) => {
         const m = FEATURE_CARD_META[i] || {};
@@ -225,7 +218,7 @@ function renderOne(s) {
       `<section class="mx-auto max-w-content px-6 py-section">` +
       eyebrowP(s) +
       (s.heading ? `<h2 class="mt-2 text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
-      paras.map((p) => `<p class="mt-3 max-w-prose text-ink">${inl(p)}</p>`).join("") +
+      paras.map((p) => `<p class="mt-3 max-w-prose text-ink">${esc(p)}</p>`).join("") +
       `<div class="ra-fggrid ra-fg-${variant}">${cards}</div>` +
       `</section>`
     );
@@ -235,7 +228,7 @@ function renderOne(s) {
     const body =
       eyebrowP(s) +
       (s.heading ? `<h2 class="mt-2 text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
-      `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${inl(p)}</p>`).join("")}</div>` +
+      `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${esc(p)}</p>`).join("")}</div>` +
       links
         .map(
           (l) =>
@@ -245,7 +238,7 @@ function renderOne(s) {
     const imgs = s.images || [];
     if (s.layout === "split" && imgs.length) {
       return (
-        `<section><div class="mx-auto grid max-w-content gap-10 px-6 py-section md:grid-cols-2 md:items-center">` +
+        `<section><div class="mx-auto grid max-w-content gap-10 px-6 py-section md:grid-cols-[2fr_1fr] md:items-center">` +
         `<div>${body}</div>` +
         `<div class="grid grid-cols-2 gap-5">` +
         imgs
@@ -290,7 +283,7 @@ function renderOne(s) {
       return (
         `<section class="cta-section cta-name-full cta-align-${align}" style="background:${bg}">` +
         `<div class="cta-fullinner">${eyebrowF}<h2 class="cta-h2" style="color:${head}">${esc(s.heading)}</h2>` +
-        (desc ? `<p class="cta-desc" style="color:${descc}">${inl(desc)}</p>` : "") +
+        (desc ? `<p class="cta-desc" style="color:${descc}">${esc(desc)}</p>` : "") +
         actions +
         `</div></section>`
       );
@@ -305,7 +298,7 @@ function renderOne(s) {
       type === "bar"
         ? `<div class="cta-inner"><div class="cta-box" style="${boxStyle}"><div class="cta-textwrap">${eyebrow}<h2 class="cta-h2" style="color:${head2}">${esc(s.heading)}</h2></div>${actions}</div></div>`
         : `<div class="cta-inner"><div class="cta-box" style="${boxStyle}">${eyebrow}<h2 class="cta-h2" style="color:${head2}">${esc(s.heading)}</h2>` +
-          (desc ? `<p class="cta-desc" style="color:${txt}">${inl(desc)}</p>` : "") +
+          (desc ? `<p class="cta-desc" style="color:${txt}">${esc(desc)}</p>` : "") +
           `${actions}</div></div>`;
     return `<section class="cta-section cta-name-boxed st-style-${style} cta-type-${type} cta-color-${boxColor} cta-align-${align}">${inner}</section>`;
   }
@@ -316,7 +309,7 @@ function renderOne(s) {
       `<div class="grid gap-10 md:grid-cols-2 md:items-center"><div>` +
       eyebrowP(s) +
       (s.heading ? `<h2 class="mt-2 text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
-      `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${inl(p)}</p>`).join("")}</div>` +
+      `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${esc(p)}</p>`).join("")}</div>` +
       links
         .map(
           (l) =>
@@ -329,44 +322,25 @@ function renderOne(s) {
     );
   }
 
-  if (s.type === "logostrip") {
-    const wall = (s.images || []).length
-      ? `<div class="mt-10" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:22px 28px;align-items:center;justify-items:center;">` +
-        (s.images || []).map((im) => `<img src="${esc(im.src)}" alt="${esc(im.alt || "")}" loading="lazy" style="max-height:52px;max-width:100%;width:auto;object-fit:contain;filter:grayscale(1);opacity:.7;" />`).join("") +
-        `</div>`
-      : "";
-    return (
-      `<section class="mx-auto max-w-content px-6 py-section">` +
-      eyebrowP(s) +
-      (s.heading ? `<h2 class="text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
-      paras.map((p) => `<p class="mt-3 max-w-prose text-ink">${inl(p)}</p>`).join("") +
-      wall +
-      `</section>`
-    );
-  }
-
   if (s.type === "clients") {
-    // Prefer logos uploaded into the section; fall back to the baked RA client set.
-    const uploaded = (s.images || []).length ? (s.images || []).map((im) => ({ alt: im.alt || "", file: im.src })) : null;
-    const logos = uploaded || CLIENT_LOGOS;
     const boxed = s.clientStyle === "boxed";
     const grid = boxed
       ? `<div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-7">` +
-        logos.map(
+        CLIENT_LOGOS.map(
           (logo) =>
-            `<div class="ra-logobox"><img src="${esc(logo.file)}" alt="${esc(logo.alt)}" loading="lazy" /></div>`
+            `<div class="ra-logobox"><img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" /></div>`
         ).join("") +
         `</div>`
       : `<div class="mt-12 grid grid-cols-2 items-center gap-x-8 gap-y-10 sm:grid-cols-4 md:grid-cols-7">` +
-        logos.map(
+        CLIENT_LOGOS.map(
           (logo) =>
-            `<img src="${esc(logo.file)}" alt="${esc(logo.alt)}" loading="lazy" class="h-8 w-auto justify-self-center object-contain grayscale opacity-60 transition duration-200 hover:opacity-100 hover:grayscale-0" />`
+            `<img src="${logo.file}" alt="${esc(logo.alt)}" loading="lazy" class="h-8 w-auto justify-self-center object-contain grayscale opacity-60 transition duration-200 hover:opacity-100 hover:grayscale-0" />`
         ).join("") +
         `</div>`;
     return (
       `<section class="mx-auto max-w-content px-6 py-section">` +
       eyebrowP(s) +
-      paras.map((p) => `<p class="mt-4 max-w-prose text-ink">${inl(p)}</p>`).join("") +
+      paras.map((p) => `<p class="mt-4 max-w-prose text-ink">${esc(p)}</p>`).join("") +
       grid +
       links
         .map(
@@ -409,40 +383,24 @@ function renderOne(s) {
       `<div class="mx-auto flex max-w-content flex-col gap-6 px-6 py-12 md:flex-row md:items-start md:justify-between">` +
       `<div class="max-w-prose">` +
       (brand ? `<p class="text-lg font-extrabold" style="color:${brandC}">${esc(brand)}</p>` : "") +
-      (blurb ? `<p class="mt-2 text-sm" style="color:${blurbC}">${inl(blurb)}</p>` : "") +
+      (blurb ? `<p class="mt-2 text-sm" style="color:${blurbC}">${esc(blurb)}</p>` : "") +
       `</div>` +
       (nav ? `<nav aria-label="Footer" class="flex flex-col gap-2 text-sm">${nav}</nav>` : "") +
       `</div>` +
       (legal.length
         ? `<div style="border-top:1px solid ${lineC}"><div class="mx-auto flex max-w-content flex-col gap-1 px-6 py-6 text-xs md:flex-row md:justify-between" style="color:${legalC}">` +
-          legal.map((p) => `<p>${inl(p)}</p>`).join("") +
+          legal.map((p) => `<p>${esc(p)}</p>`).join("") +
           `</div></div>`
         : "") +
       `</footer>`
     );
   }
 
-  // Generic fallback. Renders whatever the body yielded: paragraphs, list items
-  // (label — text), and links. Previously only paras rendered, so any generic
-  // type carrying its content as items/links (FAQ, Link Row, Status List,
-  // Comparison, Split, Pricing, Diagnostic, …) showed as heading-only.
-  const gParas = paras.length
-    ? `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${inl(p)}</p>`).join("")}</div>`
-    : "";
-  const gItems = items.length
-    ? `<ul class="mt-6 max-w-prose space-y-2 text-ink">` +
-      items.map((it) => `<li>${it.label ? `<strong>${esc(it.label)}</strong>` : ""}${it.label && it.text ? " &mdash; " : ""}${it.text ? esc(it.text) : ""}</li>`).join("") +
-      `</ul>`
-    : "";
-  const gLinks = links.length
-    ? `<div class="mt-6 flex flex-wrap gap-4">` +
-      links.map((l) => `<a href="${esc(l.href)}"${isExt(l.href) ? ' rel="noopener" target="_blank"' : ""} class="inline-flex items-center text-sm font-semibold text-orange transition-colors hover:text-orange-600">${esc(l.label)} &rarr;</a>`).join("") +
-      `</div>`
-    : "";
+  // Generic fallback.
   return (
     `<section class="mx-auto max-w-content px-6 py-section">` +
     (s.heading ? `<h2 class="text-2xl md:text-3xl">${esc(s.heading)}</h2>` : "") +
-    gParas + gItems + gLinks +
+    `<div class="mt-6 max-w-prose space-y-4 text-ink">${paras.map((p) => `<p>${esc(p)}</p>`).join("")}</div>` +
     `</section>`
   );
 }
