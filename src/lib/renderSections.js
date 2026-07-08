@@ -18,16 +18,16 @@ const CTA_COLORS = {
   orange: { fill: "#c23a00", accent: "#c23a00", tint: "#FBEFE9" },
   teal: { fill: "#007B80", accent: "#007B80", tint: "#E3F0EF" },
   navy: { fill: "#1F3864", accent: "#1F3864", tint: "#EAEEF5" },
-  lightteal: { fill: "#E3F0EF", accent: "#007B80", tint: "#E3F0EF" },
+  lightteal: { fill: "#057176", accent: "#007B80", tint: "#E3F0EF" },
 };
-const BTN_COLORS = { white: "#FFFFFF", orange: "#C44620", teal: "#007B80", navy: "#1F3864" };
+const BTN_COLORS = { white: "#FFFFFF", orange: "#C44620", teal: "#007B80", navy: "#1F3864", mint: "#d9f1ef" };
 const STYLE_BG = { light: "#FFFFFF", neutral: "#EEF1F6", dark: "#17294F" };
 // One CTA button: type is solid | outline | link; bcKey picks the color.
 function ctaButton(href, label, type, bcKey) {
   const bc = BTN_COLORS[bcKey] || BTN_COLORS.navy;
   const h = esc(href), t = esc(label);
   if (type === "link") return `<a class="cta-btn cta-link" href="${h}" style="background:transparent;border:0;color:${bc}">${t} \u2192</a>`;
-  if (type === "outline") return `<a class="cta-btn" href="${h}" style="background:transparent;color:${bc};border:1.5px solid ${bc}">${t}</a>`;
+  if (type === "outline") return `<a class="cta-btn" href="${h}" style="background:transparent;color:${bc};border:1px solid ${bc}">${t}</a>`;
   const txt = bcKey === "white" ? "#1F3864" : "#FFFFFF";
   return `<a class="cta-btn" href="${h}" style="background:${bc};color:${txt};border:1.5px solid ${bc}">${t}</a>`;
 }
@@ -268,8 +268,9 @@ function renderOne(s) {
       `<div class="cta-actions">` +
       links.map((l, i) => {
         const o = btnOpts[i] || {};
-        const btype = ["solid", "outline", "link"].includes(o.type) ? o.type : "solid";
-        const bckey = ["white", "orange", "teal", "navy"].includes(o.color) ? o.color : i === 0 ? "teal" : "orange";
+        const lt = color === "lightteal";
+        const btype = lt ? "outline" : (["solid", "outline", "link"].includes(o.type) ? o.type : "solid");
+        const bckey = lt ? "mint" : (["white", "orange", "teal", "navy"].includes(o.color) ? o.color : i === 0 ? "teal" : "orange");
         return ctaButton(l.href, l.label, btype, bckey);
       }).join("") +
       `</div>`;
@@ -289,10 +290,11 @@ function renderOne(s) {
       );
     }
     const boxColor = color === "none" ? "navy" : color, c = CTA_COLORS[boxColor];
-    const outline = type === "outline", darkBox = !outline && boxColor !== "lightteal";
+    const lt = color === "lightteal";
+    const outline = type === "outline", darkBox = !outline;
     const boxBg = outline ? c.tint : c.fill, border = outline ? `2px dashed ${c.accent}` : "1px solid transparent";
     const txt = darkBox ? "#FFFFFF" : "#3A3A4A", head2 = darkBox ? "#FFFFFF" : "#1F3864", eye = darkBox ? "rgba(255,255,255,.82)" : c.accent;
-    const eyebrow = s.eyebrow ? `<p class="cta-eyebrow" style="color:${eye}">${esc(s.eyebrow)}</p>` : "";
+    const eyebrow = s.eyebrow ? `<p class="cta-eyebrow" style="color:${eye}${lt ? ";display:flex;align-items:center;gap:.65rem" : ""}">${lt ? '<span style="display:inline-block;width:2rem;height:1px;background:#d9f1ef"></span>' : ""}${esc(s.eyebrow)}</p>` : "";
     const boxStyle = `background:${boxBg};border:${border};color:${txt}`;
     const inner =
       type === "bar"
