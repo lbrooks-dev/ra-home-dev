@@ -42,36 +42,6 @@ _The firm behind Revenue Architecture®_
 
 Start a short scoping conversation with the Engagement Agent — the RAOS method, run with you. Four dimensions: Fit, Authority, Criteria, Timeline. Prefer a person? You can talk to a human at any point.
 
-### Engage with us
-
-<!-- id: 3nwajgw -->
-
-<!-- type: cardlist -->
-
-<!-- tone: neutral -->
-
-<!-- topborder: orange -->
-
-#### A short scoping conversation
-
-_Engagement Agent_
-
-The RAOS method, run with you, before you commit. I’ll ask a few questions across Fit, Authority, Criteria, and Timeline.
-
-Hi — I'm the Engagement Agent for Revenue Architects. Whether you're a company looking to strengthen your own revenue architecture, or a consultant or agency wanting to adopt RAOS for your clients through our training and certification, I can point you the right way. You can talk to a human at any time. To start: tell me about your firm and what you're hoping RAOS can do for you.
-
-Your reply
-
-[Send](#)
-
-#### Prefer to skip the scoping bot conversation?
-
-_Talk to a human_
-
-Send a message and the authors will reply — or email [contact@revenuearchitects.com](mailto:contact@revenuearchitects.com) directly.
-
-[Send message](#)
-
 ### Take the Next Step
 
 <!-- id: ogspbdg -->
