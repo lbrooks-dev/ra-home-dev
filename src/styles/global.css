@@ -45,7 +45,7 @@
   }
   /* Default: plain teal label, normal tracking, no rule */
   .eyebrow-plain {
-    @apply inline-block text-xs font-semibold uppercase tracking-wide text-teal;
+    @apply inline-block text-xs font-semibold uppercase tracking-wide text-teal-600;
   }
   /* Subtle blueprint grid — navy (#1F3A63) at ~4.5% */
   .bg-grid {
@@ -74,7 +74,7 @@
 .tone-dark .hover\:text-orange-600:hover { color: #F2B291; }
 /* Teal arrow links (e.g. "See the full method") need lightening on dark */
 .tone-dark .text-teal { color: #5BB3B8; }
-.tone-dark .hover\:text-teal-600:hover { color: #86CBC6; }
+.tone-dark .hover\:text-teal-600:hover { color: #8BCCD0; }
 /* Authority-diagram footnote sits on the section bg, so it follows the tone */
 .tone-dark .ra-auth-note { fill: #D7DCE6; }
 /* Cards on dark become translucent light panels */
@@ -107,7 +107,7 @@
 .cta-section { position: relative; }
 .st-style-light { background: #FFFFFF; }
 .st-style-neutral { background: #F3F4F6; }
-.st-style-dark { background: #182951; }
+.st-style-dark { background: #132C57; }
 .cta-inner { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
 .cta-box { border-radius: .75rem; padding: 2.5rem 2rem; }
 .cta-eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .5rem; }
@@ -164,8 +164,8 @@ div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-top: 2.5rem
 .ra-fggrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
 @media (max-width: 780px) { .ra-fggrid { grid-template-columns: 1fr; } }
 .ra-fgcard { display: flex; flex-direction: column; align-items: flex-start; text-align: left; border-radius: 0.75rem; background: #FFFFFF; border: 1px solid #DDE1E8; box-shadow: 0 1px 2px rgb(23 41 79 / 0.05); padding: 1.5rem; height: 100%; }
-.ra-fgcard .fgc-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0E7E82; margin: 0 0 0.25rem; }
-.ra-fgcard .fgc-title { font-size: 1.25rem; font-weight: 700; color: #182951; margin: 0 0 0.5rem; line-height: 1.2; }
+.ra-fgcard .fgc-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #057176; margin: 0 0 0.25rem; }
+.ra-fgcard .fgc-title { font-size: 1.25rem; font-weight: 700; color: #132C57; margin: 0 0 0.5rem; line-height: 1.2; }
 .ra-fgcard .fgc-desc { font-size: 0.9rem; line-height: 1.6; color: #3A3A4A; flex: 1; margin: 0; }
 .ra-fgcard .fgc-link { margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: #C23A00; text-decoration: none; }
 .ra-fgcard .fgc-link:hover { text-decoration: underline; }
