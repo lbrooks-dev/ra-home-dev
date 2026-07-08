@@ -149,7 +149,7 @@ function renderOne(s) {
 
   if (s.type === "hero") {
     const logoBg = s.heroLogo
-      ? `<div class="ra-herologo" aria-hidden="true"><img src="/brand/ra-symbol.svg" alt="" /></div>`
+      ? `<div class="pv-hero-sym spin" aria-hidden="true" style="background-image:url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDMwLjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDkuMDMgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMCIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA4NDMgNzMwLjIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDg0MyA3MzAuMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNCQTZGRDg7fQoJLnN0MXtmaWxsOiM4ODMxQUQ7fQoJLnN0MntmaWxsOiNCQ0JEQzA7fQoJLnN0M3tmaWxsOiM2ODZBNkE7fQoJLnN0NHtmaWxsOnVybCgjU1ZHSURfMV8pO30KPC9zdHlsZT4KPGc+Cgk8Zz4KCQk8cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjEyMC42LDYyNS45IDAuMiw2MjYgNjAuNSw3MzAuMiAxODAuOSw3MzAuMiAJCSIvPgoJCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMjQxLjEsNjI1LjkgMTgwLjgsNTIxLjYgMTIwLjYsNjI1LjkgMTgwLjksNzMwLjIgCQkiLz4KCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjY2Mi40LDUyMS40IDU0Miw1MjEuNCA0ODEuOSw2MjUuNyA2MDIuMyw2MjUuNyAJCSIvPgoJCTxwb2x5Z29uIGNsYXNzPSJzdDMiIHBvaW50cz0iNjAuMyw3MzAuMiAwLDYyNS43IDYwMi4xLDYyNS43IDM2MSwyMDguNyA0ODEuNSwyMDguNyA3MjIuNSw2MjUuNyA3ODIuNyw3MzAuMiAJCSIvPgoJCQoJCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjE4MC42IiB5MT0iMzY5LjEiIHgyPSI4NDMiIHkyPSIzNjkuMSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtMSAwIDczNCkiPgoJCQk8c3RvcCAgb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojRjY5RjMzIi8+CgkJCTxzdG9wICBvZmZzZXQ9IjEiIHN0eWxlPSJzdG9wLWNvbG9yOiNGNDRGMjIiLz4KCQk8L2xpbmVhckdyYWRpZW50PgoJCTxwb2x5Z29uIGNsYXNzPSJzdDQiIHBvaW50cz0iODQzLDYyNS41IDc4Mi44LDcyOS44IDQ4MS41LDIwOC42IDQ4MS41LDIwOC42IDI0MC45LDYyNS44IDE4MC42LDUyMS41IDQ4MS40LDAgNTQxLjcsMTA0LjMgCgkJCTU0MS43LDEwNC4zIAkJIi8+CgkJPHBhdGggY2xhc3M9InN0MiIgZD0iTTQyMS40LDEwNC4zTDQyMS40LDEwNC4zTDQyMS40LDEwNC4zbC02MC4yLDEwNC4zbDAsMGwwLDBsMCwwTDMwMSwzMTIuOWwwLDBsMCwwbDAsMGwtNjAsMTA0LjNsMCwwCgkJCWwtNjAuMiwxMDQuM2wwLDBsMTIwLjQtMC4xbDAsMGwxMjAuNC0wLjFsMCwwbDEyMC40LTAuMWwtNjAuMiwxMDQuM2wtMTIwLjQsMC4xbDAsMEwyNDEsNjI1LjdsMCwwbC0xMjAuNCwwLjFsMCwwTDAuMyw2MjUuOWwwLDAKCQkJbDYwLjItMTA0LjNoMC45bDAsMGgtMC45bDYwLjItMTA0LjNoMC45bDAsMGgtMC45bDYwLTEwNC4zaDAuOGwwLDBoLTAuOGw2MC4yLTEwNC4zaDAuNmwwLDBoLTAuNkwzMDEsMTA0LjRoMC4zbDAsMEgzMDEKCQkJTDM2MS4yLDAuMUw0ODEuNiwwTDQyMS40LDEwNC4zTDQyMS40LDEwNC4zeiIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=');animation-duration:189s"></div>`
       : "";
     return (
       `<section class="relative overflow-hidden border-b border-navy-100">` +
@@ -163,9 +163,7 @@ function renderOne(s) {
           links
             .map(
               (l, i) =>
-                `<a href="${esc(l.href)}" class="inline-flex items-center justify-center rounded-card px-6 py-3 text-sm font-semibold transition-colors ${
-                  i === 0 ? "bg-orange text-surface hover:bg-orange-600" : ""
-                }"${i === 0 ? "" : " style=\"background:transparent;color:#FFFFFF;border:1px solid #5bb3b8\""}>${esc(l.label)}</a>`
+                `<a href="${esc(l.href)}" class="ra-herobtn inline-flex items-center justify-center rounded-card px-6 py-3 text-sm font-semibold" style="${i === 0 ? "background:#c23a00;color:#FFFFFF" : "background:transparent;color:#FFFFFF;border:1px solid #5bb3b8"}">${esc(l.label)}</a>`
             )
             .join("") +
           `</div>`
@@ -294,7 +292,9 @@ function renderOne(s) {
     const outline = type === "outline", darkBox = !outline;
     const boxBg = outline ? c.tint : c.fill, border = outline ? `2px dashed ${c.accent}` : "1px solid transparent";
     const txt = darkBox ? "#FFFFFF" : "#3A3A4A", head2 = darkBox ? "#FFFFFF" : "#1F3864", eye = darkBox ? "rgba(255,255,255,.82)" : c.accent;
-    const eyebrow = s.eyebrow ? `<p class="cta-eyebrow" style="color:${eye}${lt ? ";display:flex;align-items:center;gap:.65rem" : ""}">${lt ? '<span style="display:inline-block;width:2rem;height:1px;background:#d9f1ef"></span>' : ""}${esc(s.eyebrow)}</p>` : "";
+    const eyeText = lt ? "rgba(255,255,255,.82)" : (darkBox ? "#5bb3b8" : c.accent);
+    const ruleColor = lt ? "#d9f1ef" : "#c23a00";
+    const eyebrow = s.eyebrow ? `<p class="cta-eyebrow" style="color:${eyeText};display:flex;align-items:center;gap:.75rem"><span style="display:inline-block;width:2rem;height:1px;background:${ruleColor}"></span>${esc(s.eyebrow)}</p>` : "";
     const boxStyle = `background:${boxBg};border:${border};color:${txt}`;
     const inner =
       type === "bar"

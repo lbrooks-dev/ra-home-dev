@@ -110,7 +110,7 @@
 .st-style-dark { background: #17294F; }
 .cta-inner { max-width: 1280px; margin: 0 auto; padding: 6rem 1.5rem; }
 .cta-box { border-radius: .75rem; padding: 2.5rem 2rem; }
-.cta-eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .5rem; }
+.cta-eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin: 0 0 .5rem; }
 .cta-h2 { font-size: clamp(1.5rem, 3vw, 1.875rem); font-weight: 800; line-height: 1.15; margin: 0; max-width: 62ch; }
 .cta-desc { margin: 1rem 0 0; max-width: 62ch; line-height: 1.6; font-size: 1rem; }
 .cta-actions { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
@@ -143,11 +143,14 @@
 .cta-name-full.cta-align-right .cta-fullinner { text-align: right; }
 .cta-name-full.cta-align-right .cta-h2, .cta-name-full.cta-align-right .cta-desc { margin-left: auto; margin-right: 0; }
 .cta-name-full.cta-align-right .cta-actions { justify-content: flex-end; }
-/* ---- Hero rotating logo watermark (option: herologo) ---- */
-.ra-herologo { position: absolute; left: 50%; top: 50%; transform: translateY(-50%); width: min(65%, 850px); opacity: 0.10; pointer-events: none; z-index: 0; }
-.ra-herologo img { display: block; width: 100%; height: auto; transform-origin: 50% 50%; animation: ra-spin 120s linear infinite; }
-@keyframes ra-spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .ra-herologo img { animation: none; } }
+/* ---- Hero rotating symbol watermark (option: herologo) ---- */
+.pv-hero-sym { position: absolute; left: 50%; top: 50%; width: min(77%, 950px); aspect-ratio: 843 / 730; background: right center / contain no-repeat; opacity: .14; z-index: 1; pointer-events: none; transform: translateY(-50%) rotate(-100deg); transform-origin: center; }
+.pv-hero-sym.spin { animation: raspin 120s linear infinite; }
+@keyframes raspin { from { transform: translateY(-50%) rotate(-100deg); } to { transform: translateY(-50%) rotate(260deg); } }
+@media (prefers-reduced-motion: reduce) { .pv-hero-sym.spin { animation: none; } }
+/* Hero button hover (opacity) — CTA buttons already have .cta-btn:hover */
+.ra-herobtn { transition: opacity .2s; }
+.ra-herobtn:hover { opacity: .88; }
 /* ---- Boxed client logos (option: clientstyle=boxed; first logo filled) ---- */
 .ra-logobox { display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; background: #FFFFFF; border-radius: 15px; padding: 1.25rem; border: 5px solid transparent; box-shadow: 0 1px 3px rgb(31 56 100 / 0.06); filter: grayscale(1); opacity: 0.72; transition: filter 0.2s, opacity 0.2s, box-shadow 0.2s, border-color 0.2s; }
 .ra-logobox img { display: block; height: 48px; width: auto; max-width: 100%; object-fit: contain; }
@@ -160,6 +163,11 @@
    keeping the inner box vertically centered (equal padding top and bottom) */
 div:has(> .cta-section):has(+ div > footer) .cta-inner,
 div:has(> .cta-section):has(+ div > footer) .cta-fullinner { padding-top: 2.5rem; padding-bottom: 6rem; }
+/* Two stacked CTA sections: reduce + even the gap between them (was ~8.5rem -> 4rem). Tune the 2rem below. */
+div:has(> .cta-section):has(+ div > .cta-section) .cta-inner,
+div:has(> .cta-section):has(+ div > .cta-section) .cta-fullinner { padding-bottom: 2rem; }
+div:has(> .cta-section) + div:has(> .cta-section) .cta-inner,
+div:has(> .cta-section) + div:has(> .cta-section) .cta-fullinner { padding-top: 2rem; }
 /* ---- Feature grid card variants (option: fgname) ---- */
 .ra-fggrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
 @media (max-width: 780px) { .ra-fggrid { grid-template-columns: 1fr; } }
