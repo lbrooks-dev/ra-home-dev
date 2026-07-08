@@ -20,7 +20,7 @@
 
 _REVENUE ARCHITECTS_
 
-[The Firm](/about) · [Services](/services) · [Proof](/proof) · [Insights](/insights) · [Engage](/engage)
+[The Firm](/about) · [Services](/services) · [Proof](/proof) · [Insights](/insights) · [Contact](/contact)
 
 _true / false_
 
@@ -38,7 +38,7 @@ _true / false_
 
 _The firm behind Revenue Architecture®_
 
-#### Tell me what you are trying to fix.
+#### Tell us what you are trying to fix.
 
 Start a short scoping conversation with the Engagement Agent — the RAOS method, run with you. Four dimensions: Fit, Authority, Criteria, Timeline. Prefer a person? You can talk to a human at any point.
 
