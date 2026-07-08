@@ -1,4 +1,4 @@
-<!-- binder: BINDER -->
+<!-- binder: FOLIO -->
 
 # Revenue architects
 
@@ -153,6 +153,12 @@ In high-consideration sales, story is not creative fluff — it is a logic flow 
 BANT qualifies a prospect to the level of a category — likely to buy a solution, but not necessarily yours. Why high-consideration firms must qualify for their specific advantage, not just budget and need.
 
 [Read](/insights/extend-lead-qualification-process-beyond-bant)
+
+#### RIAs: What Your Ideal Client Wants from a Fiduciary Advisor
+
+For an independent, fee-only RIA, the fiduciary standard is a genuine point of differentiation — if you position it well. How to turn fee transparency and best-interest advice into a reason clients choose you.
+
+[Read](/insights/rias-what-your-ideal-client-wants-from-a-financial-advisor)
 
 #### RIAs: What Your Ideal Client Wants from a Fiduciary Advisor
 
