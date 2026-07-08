@@ -1,5 +1,5 @@
 ---
-// Driven by MyFolio. Reads ./proof.md at the repo root and renders it through the
+// Driven by MyFolio. Reads ./insights.md at the repo root and renders it through the
 // site's real components + tokens (same bridge as index.astro / home-demo).
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,15 +8,15 @@ import MyFolioRender from '../components/MyFolioRender.astro';
 import { parseContent } from '../lib/parseContent.js';
 
 let md = '';
-try { md = fs.readFileSync(path.resolve('./proof.md'), 'utf8'); }
-catch (e) { md = '# Revenue Architects\n## Proof — Revenue Architects\n### Notice\nNo proof.md found at the repo root yet.'; }
+try { md = fs.readFileSync(path.resolve('./insights.md'), 'utf8'); }
+catch (e) { md = '# Revenue Architects\n## Insights — Revenue Architects\n### Notice\nNo insights.md found at the repo root yet.'; }
 const { sections } = parseContent(md);
 const hasFooter = sections.some((s) => s.type === 'footer');
 const hasNav = sections.some((s) => s.type === 'nav');
 ---
 <Base
-  title="Proof — Revenue Architects"
-  description="Selected engagements where Revenue Architecture shaped how firms define their market, position value, and go to market."
+  title="Insights — Revenue Architects"
+  description="Firm perspectives on revenue architecture, high-consideration B2B and financial-services growth, and AI-operated revenue systems."
   showNav={!hasNav}
   showFooter={!hasFooter}
 >

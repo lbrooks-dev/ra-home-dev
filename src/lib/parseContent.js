@@ -10,6 +10,25 @@
 
 const DASH = /\s*[\u2014\u2013-]\s*/; // em / en / hyphen
 
+// Split a cardlist section's body into cards. Each card starts at a #### heading;
+// an italic _line_ is its eyebrow, a lone [label](href) is its link, the rest is body.
+function parseCards(body) {
+  const cards = [];
+  let c = null;
+  for (const raw of (body || [])) {
+    const t = raw.trim();
+    if (!t) continue;
+    let m;
+    if ((m = t.match(/^#{4,6}\s+(.+)$/))) { if (c) cards.push(c); c = { heading: m[1].trim(), eyebrow: '', paras: [], link: null }; continue; }
+    if (!c) continue;
+    if ((m = t.match(/^_(.+)_$/))) { c.eyebrow = m[1].trim(); continue; }
+    if ((m = t.match(/^\[([^\]]+)\]\(([^)]+)\)$/))) { c.link = { label: m[1], href: m[2] }; continue; }
+    c.paras.push(t);
+  }
+  if (c) cards.push(c);
+  return cards;
+}
+
 export function parseContent(md) {
   const lines = (md || '').replace(/\r\n/g, '\n').split('\n');
   let siteTitle = '';
@@ -63,6 +82,17 @@ export function parseContent(md) {
     const csx = ctaKey(line, 'clientstyle'); if (csx) { cur.clientStyle = csx; continue; }
     if (/^\s*<!--\s*herologo\s*-->\s*$/i.test(line)) { cur.heroLogo = true; continue; }
     const fgn = ctaKey(line, 'fgname'); if (fgn) { cur.fgVariant = fgn; continue; }
+    const clv = ctaKey(line, 'clname'); if (clv) { cur.clVariant = clv; continue; }
+    const tbv = ctaKey(line, 'topborder'); if (tbv) { cur.topBorder = tbv; continue; }
+    const ebc = ctaKey(line, 'ebcolor'); if (ebc) { cur.eyebrowColor = ebc; continue; }
+    const ptv = ctaKey(line, 'padtop'); if (ptv) { cur.padTop = ptv; continue; }
+    const pbv = ctaKey(line, 'padbot'); if (pbv) { cur.padBot = pbv; continue; }
+    const hb1 = ctaKey(line, 'herob1'); if (hb1) { const q = hb1.split('/'); cur.heroB1Type = q[0]; cur.heroB1Color = q[1] || 'orange'; continue; }
+    const hb2 = ctaKey(line, 'herob2'); if (hb2) { const q = hb2.split('/'); cur.heroB2Type = q[0]; cur.heroB2Color = q[1] || 'orange'; continue; }
+    const hb3 = ctaKey(line, 'herob3'); if (hb3) { const q = hb3.split('/'); cur.heroB3Type = q[0]; cur.heroB3Color = q[1] || 'orange'; continue; }
+    const hbv = ctaKey(line, 'herobtns'); if (hbv) { cur.heroBtns = hbv; continue; }
+    const hsv = ctaKey(line, 'heading'); if (hsv) { cur.headingSize = hsv; continue; }
+    const capm = line.match(/^\s*<!--\s*caption:\s*(.+?)\s*-->\s*$/i); if (capm) { cur.caption = capm[1].trim(); continue; }
     if (isComment(line)) continue;
     cur.body.push(line);
   }
@@ -98,7 +128,7 @@ export function parseContent(md) {
       }
       paras.push(t);
     }
-    return { type: s.type || 'generic', id: s.id || '', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', layout: s.layout || 'default', heroLogo: !!s.heroLogo, clientStyle: (['bare','boxed'].includes(s.clientStyle) ? s.clientStyle : 'bare'), fgVariant: (['topborder','titlebg','icon','darktop','line','alt'].includes(s.fgVariant) ? s.fgVariant : 'topborder'), title: s.title, eyebrow, heading: heading || s.title, paras, items, images, links };
+    return { type: s.type || 'generic', id: s.id || '', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', layout: s.layout || 'default', heroLogo: !!s.heroLogo, clientStyle: (['bare','boxed'].includes(s.clientStyle) ? s.clientStyle : 'bare'), fgVariant: (['topborder','titlebg','icon','darktop','line','alt'].includes(s.fgVariant) ? s.fgVariant : 'topborder'), title: s.title, eyebrow, heading: heading || s.title, paras, items, images, links, clVariant: (['leftborder','plain','authors'].includes(s.clVariant) ? s.clVariant : 'plain'), topBorder: (['orange','teal','navy'].includes(s.topBorder) ? s.topBorder : ''), eyebrowColor: (['orange','teal','navy'].includes(s.eyebrowColor) ? s.eyebrowColor : ''), padTop: (['sm','md','lg'].includes(s.padTop) ? s.padTop : ''), padBot: (['sm','md','lg'].includes(s.padBot) ? s.padBot : ''), heroB1Type: (['solid','outline'].includes(s.heroB1Type) ? s.heroB1Type : ''), heroB1Color: (['orange','teal','navy','white'].includes(s.heroB1Color) ? s.heroB1Color : 'orange'), heroB2Type: (['solid','outline'].includes(s.heroB2Type) ? s.heroB2Type : ''), heroB2Color: (['orange','teal','navy','white'].includes(s.heroB2Color) ? s.heroB2Color : 'orange'), heroB3Type: (['solid','outline'].includes(s.heroB3Type) ? s.heroB3Type : ''), heroB3Color: (['orange','teal','navy','white'].includes(s.heroB3Color) ? s.heroB3Color : 'orange'), heroBtns: (s.heroBtns === 'filled' ? 'filled' : 'default'), headingSize: (s.headingSize === 'large' ? 'large' : 'default'), caption: s.caption || '', cards: (s.type === 'cardlist' ? parseCards(s.body) : []) };
   });
 
   return { siteTitle, pageTitle, sections };

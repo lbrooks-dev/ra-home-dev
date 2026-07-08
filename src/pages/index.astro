@@ -1,5 +1,5 @@
 ---
-// Home page, driven by MyFolio. Reads content.md at the repo root and renders
+// Home page, driven by MyFolio. Reads home.md at the repo root and renders
 // it through the site's real components + tokens (same bridge as /home-demo).
 // The previous hand-built home is preserved in index-ra-original.astro.bak.
 import fs from 'node:fs';
@@ -9,8 +9,8 @@ import MyFolioRender from '../components/MyFolioRender.astro';
 import { parseContent } from '../lib/parseContent.js';
 
 let md = '';
-try { md = fs.readFileSync(path.resolve('./content.md'), 'utf8'); }
-catch (e) { md = '# Revenue Architects\n## Home\n### Notice\nNo content.md found at the repo root yet.'; }
+try { md = fs.readFileSync(path.resolve('./home.md'), 'utf8'); }
+catch (e) { md = '# Revenue Architects\n## Home\n### Notice\nNo home.md found at the repo root yet.'; }
 const { sections } = parseContent(md);
 const hasFooter = sections.some((s) => s.type === 'footer');
 const hasNav = sections.some((s) => s.type === 'nav');
