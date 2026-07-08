@@ -20,7 +20,7 @@
 
 _REVENUE ARCHITECTS_
 
-[The Firm](#) · [Services](#) · [Proof](#) · [Engage](#)
+[The Firm](#) · [Services](#) · [Proof](#) · [Insights](#) · [Engage](#)
 
 _true / false_
 
@@ -84,7 +84,7 @@ The same team that wrote the method delivers all three. Teams and practitioners 
 
 <!-- type: pageintro -->
 
-<!-- tone: dark -->
+<!-- tone: light -->
 
 <!-- layout: split -->
 
@@ -129,6 +129,24 @@ Firms in financial services and high-consideration B2B have trusted the team beh
 ### Two ways forward
 
 <!-- id: rbb3ryo -->
+
+<!-- type: ctabanner -->
+
+<!-- tone: dark -->
+
+<!-- ctacolor: lightteal -->
+
+_Start the conversation_
+
+#### Scope an engagement, the way we work.
+
+A short scoping conversation across the four FACT dimensions — Fit, Authority, Criteria, Timeline — so the first real conversation is a good one.
+
+[Start with Engage](#)
+
+### Two ways forward
+
+<!-- id: nnq0iig -->
 
 <!-- type: ctabanner -->
 
