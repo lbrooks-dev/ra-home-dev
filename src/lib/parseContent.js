@@ -90,7 +90,12 @@ export function parseContent(md) {
         continue;
       }
       const found = [...t.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((x) => ({ label: x[1], href: x[2] }));
-      if (found.length) { links = links.concat(found); continue; }
+      if (found.length) {
+        // A line that is ONLY link(s) (plus separators) is a standalone link/button row.
+        // A line with prose around a link stays a paragraph so the inline link renders.
+        const residual = t.replace(/\[[^\]]+\]\([^)]+\)/g, '').replace(/[\u00b7|,\/&\s-]+/g, '').trim();
+        if (!residual) { links = links.concat(found); continue; }
+      }
       paras.push(t);
     }
     return { type: s.type || 'generic', id: s.id || '', eyebrowStyle: s.eyebrowStyle || 'border', tone: (['light','neutral','dark'].includes(s.tone) ? s.tone : (s.type === 'pageintro' ? 'neutral' : 'light')), align: (['left','center','right'].includes(s.align) ? s.align : 'left'), bg: (['none','grid','gradient'].includes(s.bg) ? s.bg : 'none'), ctaName: s.ctaName || 'boxed', ctaType: s.ctaType || 'solid', ctaColor: s.ctaColor || 'none', ctaB1Type: s.ctaB1Type || 'solid', ctaB1Color: s.ctaB1Color || 'default', ctaB2Type: s.ctaB2Type || 'solid', ctaB2Color: s.ctaB2Color || 'default', layout: s.layout || 'default', heroLogo: !!s.heroLogo, clientStyle: (['bare','boxed'].includes(s.clientStyle) ? s.clientStyle : 'bare'), fgVariant: (['topborder','titlebg','icon','darktop','line','alt'].includes(s.fgVariant) ? s.fgVariant : 'topborder'), title: s.title, eyebrow, heading: heading || s.title, paras, items, images, links };
